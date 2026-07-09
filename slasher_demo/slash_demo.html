@@ -40,13 +40,13 @@
                 </select>
 
                 <div id="auth-section">
-                    <button onclick="openLoginModal()" id="ui-login-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-1.5 rounded-full text-sm font-semibold transition-colors">登入</button>
+                    <button onclick="openLoginModal(this)" id="ui-login-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-1.5 rounded-full text-sm font-semibold transition-colors">登入</button>
                 </div>
             </div>
         </div>
     </nav>
 
-    <header id="hero-section" class="bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-900 dark:to-purple-900 text-white py-16 transition-colors">
+    <header id="hero-section" class="hidden bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-900 dark:to-purple-900 text-white py-16 transition-colors">
         <div class="max-w-6xl mx-auto px-4 text-center">
             <h1 class="text-4xl md:text-5xl font-extrabold mb-4" id="ui-hero-title">釋放潛力，多元文化自由職客</h1>
             <p class="text-lg md:text-xl opacity-90 mb-8" id="ui-hero-desc">專為香港少數族裔打造的靈活就業、教育資源與社區支持平台。</p>
@@ -96,7 +96,8 @@
         <p id="ui-footer">© 2026 EM Slasher Hub Prototype. Demo Only.</p>
     </footer>
 
-    <div id="login-modal" class="fixed inset-0 bg-gray-900 bg-opacity-60 z-[100] hidden flex items-center justify-center p-4" onclick="if(event.target === this) document.getElementById('login-modal').classList.add('hidden')">
+    <!-- 將 fixed 更改為 absolute，items-center 更改為 items-start -->
+    <div id="login-modal" class="absolute inset-0 bg-gray-900 bg-opacity-60 z-[100] hidden flex items-start justify-center p-4" onclick="if(event.target === this) document.getElementById('login-modal').classList.add('hidden')">
         <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-sm p-6 relative">
             <button onclick="document.getElementById('login-modal').classList.add('hidden')" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -108,7 +109,8 @@
         </div>
     </div>
 
-    <div id="course-modal" class="fixed inset-0 bg-gray-900 bg-opacity-60 z-[100] hidden flex items-center justify-center p-4 fade-in" onclick="if(event.target === this) closeModal()">
+    <!-- 將 fixed 更改為 absolute，items-center 更改為 items-start -->
+    <div id="course-modal" class="absolute inset-0 bg-gray-900 bg-opacity-60 z-[100] hidden flex items-start justify-center p-4 fade-in" onclick="if(event.target === this) closeModal()">
         <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto no-scrollbar relative">
             <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-red-500 bg-white dark:bg-gray-700 rounded-full p-2 shadow-sm z-10 border border-gray-200 dark:border-gray-600">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -145,7 +147,6 @@
             ne: { logoTitle: "स्ल्यासर प्लेटफर्म", heroTitle: "आफ्नो क्षमता अनलक गर्नुहोस्", heroDesc: "लचिलो रोजगार, शिक्षा र सामुदायिक समर्थन प्लेटफर्म।", jobTitle: "💼 रोजगार अवसरहरू", eduTitle: "📚 शैक्षिक संसाधन", comTitle: "🤝 सामुदायिक समर्थन", applyBtn: "आवेदन दिनुहोस्", learnBtn: "विवरण", joinBtn: "सामेल हुनुहोस्", loginBtn: "लगइन", loginTitle: "लगइन", fltAll: "सबै", fltTrans: "अनुवाद", fltRemote: "रिमोट", fltIt: "आईटी", fltEdu: "शिक्षा", fltTour: "पर्यटन", syllabusTitle: "पाठ्यक्रम", enrollBtn: "भर्ना", closeBtn: "बन्द गर्नुहोस्" }
         };
 
-        // 5 個就業機會 (全部使用穩定的 picsum 特定 ID 圖片)
         const mockJobs = [
             { category: "Translation", img: "https://picsum.photos/id/20/400/200", zh: { title: "烏爾都語醫療翻譯", tag: "翻譯", pay: "HK$ 150/小時", desc: "協助本地診所進行日常醫患溝通。" }, en: { title: "Urdu Medical Interpreter", tag: "Translation", pay: "HK$ 150/hr", desc: "Assist local clinics with daily patient communication." }, ur: { title: "میڈیکل مترجم", tag: "ترجمہ", pay: "HK$ 150/hr", desc: "مقامی کلینکس میں مریضوں سے رابطے میں مدد کریں۔" }, hi: { title: "चिकित्सा दुभाषिया", tag: "अनुवाद", pay: "HK$ 150/hr", desc: "स्थानीय क्लीनिकों को रोगियों के साथ संचार में सहायता करें।" }, ne: { title: "चिकित्सा अनुवादक", tag: "अनुवाद", pay: "HK$ 150/hr", desc: "स्थानीय क्लिनिकहरूमा बिरामीहरूसँग कुराकानी गर्न मद्दत गर्नुहोस्।" } },
             { category: "Remote", img: "https://picsum.photos/id/3/400/200", zh: { title: "多語言社交媒體客服", tag: "遠程", pay: "HK$ 80/小時", desc: "在家工作，負責回覆客戶在社交平台上的查詢。" }, en: { title: "Social Media CS", tag: "Remote", pay: "HK$ 80/hr", desc: "Work from home. Handle customer inquiries on social media." }, ur: { title: "سوشل میڈیا کسٹمر سروس", tag: "ریموٹ", pay: "HK$ 80/hr", desc: "گھر سے کام کریں۔ سوشل میڈیا پر صارفین کے سوالات سنبھالیں۔" }, hi: { title: "सोशल मीडिया ग्राहक सेवा", tag: "रिमोट", pay: "HK$ 80/hr", desc: "घर से काम करें। पूछताछ संभालें।" }, ne: { title: "सामाजिक सञ्जाल ग्राहक सेवा", tag: "रिमोट", pay: "HK$ 80/hr", desc: "घरबाट काम गर्नुहोस्। सोधपुछ ह्यान्डल गर्नुहोस्।" } },
@@ -154,7 +155,6 @@
             { category: "Education", img: "https://picsum.photos/id/24/400/200", zh: { title: "英語/烏爾都語私人導師", tag: "教育", pay: "HK$ 250/小時", desc: "為區內小學生提供課後功課輔導。" }, en: { title: "Private Language Tutor", tag: "Education", pay: "HK$ 250/hr", desc: "Provide after-school homework tutoring for primary students." }, ur: { title: "پرائیویٹ ٹیوٹر", tag: "تعلیم", pay: "HK$ 250/hr", desc: "پرائمری طلباء کے لیے اسکول کے بعد ہوم ورک ٹیوشن فراہم کریں۔" }, hi: { title: "निजी ट्यूटर", tag: "शिक्षा", pay: "HK$ 250/hr", desc: "छात्रों के लिए स्कूल के बाद होमवर्क ट्यूशन।" }, ne: { title: "निजी ट्युटर", tag: "शिक्षा", pay: "HK$ 250/hr", desc: "विद्यार्थीहरूको लागि स्कूल पछि गृहकार्य ट्यूशन।" } }
         ];
 
-        // 5 個教育資源
         const mockEducation = [
             { img: "https://picsum.photos/id/36/400/200", zh: { title: "職場實用粵語班", tag: "語言", desc: "快速掌握面試及日常工作常用粵語詞彙。", syllabus: ["自我介紹與寒暄", "職場溝通與請假", "實戰對話"] }, en: { title: "Workplace Cantonese", tag: "Language", desc: "Master common Cantonese for interviews.", syllabus: ["Self-introduction", "Workplace Comm", "Dialogues"] }, ur: { title: "کینٹونیز کلاس", tag: "زبان", desc: "انٹرویوز کے لیے کینٹونیز۔", syllabus: ["تعارف", "مواصلات", "گفتگو"] }, hi: { title: "कैंटोनीज़ कक्षा", tag: "भाषा", desc: "साक्षात्कार के लिए कैंटोनीज़।", syllabus: ["परिचय", "संचार", "संवाद"] }, ne: { title: "क्यान्टोनिज कक्षा", tag: "भाषा", desc: "अन्तर्वार्ताका लागि क्यान्टोनिज।", syllabus: ["परिचय", "संचार", "संवाद"] } },
             { img: "https://picsum.photos/id/48/400/200", zh: { title: "AI 工具與 Canva 入門", tag: "科技", desc: "學習使用 AI 工具撰寫電郵及設計個人作品集。", syllabus: ["數碼工具箱", "Canva 設計", "ChatGPT 寫作"] }, en: { title: "AI Tools & Canva", tag: "Tech", desc: "Learn to use AI for emails and portfolio design.", syllabus: ["Digital Tools", "Canva Design", "ChatGPT"] }, ur: { title: "AI ٹولز اور کینوا", tag: "ٹیک", desc: "ای میلز اور ڈیزائن کے لیے AI۔", syllabus: ["ڈیجیٹل ٹولز", "کینوا ڈیزائن", "ChatGPT"] }, hi: { title: "AI उपकरण और कैनवा", tag: "तकनीक", desc: "डिज़ाइन के लिए AI।", syllabus: ["उपकरण", "कैनवा", "ChatGPT"] }, ne: { title: "AI उपकरणहरू र क्यानभा", tag: "प्रविधि", desc: "डिजाइनको लागि AI।", syllabus: ["उपकरणहरू", "क्यानभा", "ChatGPT"] } },
@@ -163,17 +163,32 @@
             { img: "https://picsum.photos/id/96/400/200", zh: { title: "基礎 Python 與數據處理", tag: "IT", desc: "針對新手的基礎編程課程，提升辦公自動化能力。", syllabus: ["Python 基礎語法", "數據錄入與清洗", "自動化腳本"] }, en: { title: "Basic Python & Data", tag: "IT", desc: "Beginner coding course for office automation.", syllabus: ["Python Basics", "Data Cleaning", "Automation Scripts"] }, ur: { title: "بنیادی ازگر اور ڈیٹا", tag: "آئی ٹی", desc: "آفس آٹومیشن کے لیے کوڈنگ کا کورس۔", syllabus: ["ازگر کی بنیادی باتیں", "ڈیٹا کی صفائی", "اسکرپٹس"] }, hi: { title: "बुनियादी पायथन और डेटा", tag: "आईटी", desc: "कार्यालय स्वचालन के लिए कोडिंग पाठ्यक्रम।", syllabus: ["पायथन की मूल बातें", "डेटा की सफाई", "स्क्रिप्ट"] }, ne: { title: "आधारभूत पाइथन र डाटा", tag: "आईटी", desc: "कार्यालय स्वचालनको लागि कोडिङ पाठ्यक्रम।", syllabus: ["पाइथनको आधारभूत कुराहरू", "डाटा सफाई", "लिपिहरू"] } }
         ];
 
-        // 5 個社區支持
         const mockCommunity = [
             { img: "https://picsum.photos/id/175/400/200", zh: { title: "勞工權益與強積金指南", tag: "法律", desc: "了解在香港的基本合法權益及強積金保障。" }, en: { title: "Labor Rights Guide", tag: "Legal", desc: "Understand your legal rights and MPF in HK." }, ur: { title: "لیبر رائٹس گائیڈ", tag: "قانونی", desc: "اپنے قانونی حقوق اور MPF کو سمجھیں۔" }, hi: { title: "श्रम अधिकार गाइड", tag: "कानूनी", desc: "कानूनी अधिकारों को समझें।" }, ne: { title: "श्रम अधिकार गाइड", tag: "कानूनी", desc: "कानूनी अधिकारहरू बुझ्नुहोस्।" } },
-            { img: "https://picsum.photos/id/117/400/200", zh: { title: "Slasher 互助交流會", tag: "社交", desc: "線下聚會，分享接單經驗並拓展人脈網絡。" }, en: { title: "Networking Event", tag: "Social", desc: "Offline gathering to share gig experiences." }, ur: { title: "نیٹ ورکنگ ایونٹ", tag: "نیٹ ورکنگ", desc: "گگ کے تجربات شیئر کرنے کے لیے اجتماع۔" }, hi: { title: "नेटवर्किंग इवेंट", tag: "सामाजिक", desc: "अनुभव साझा करने के लिए सभा।" }, ne: { title: "नेटवर्किङ कार्यक्रम", tag: "सामाजिक", desc: "अनुभव साझा गर्न भेला।" } },
+            { img: "https://picsum.photos/id/117/400/200", zh: { title: "Slasher 互助交流會", tag: "社交", desc: "線下聚會，分享接單經驗並拓展人脈網絡。" }, en: { title: "Networking Event", tag: "Social", desc: "Offline gathering to share gig experiences." }, ur: { title: "نیٹ ورکنگ ایونٹ", tag: "نیٹ ورکنگ", desc: "گگ کے تجربات شیئر کرنے کے لیے اجتماع۔" }, hi: { title: "नेटवर्किंग इवेंट", tag: "सामाजिक", desc: "अनुभव साझा करने के लिए सभा।" }, ne: { title: "नेटवर्किंग कार्यक्रम", tag: "सामाजिक", desc: "अनुभव साझा गर्न भेला।" } },
             { img: "https://picsum.photos/id/152/400/200", zh: { title: "減壓與心理健康小組", tag: "健康", desc: "由社工帶領，為面臨壓力的 Slasher 提供情緒支援。" }, en: { title: "Mental Health Support", tag: "Health", desc: "Led by social workers, providing emotional support." }, ur: { title: "ذہنی صحت سپورٹ", tag: "صحت", desc: "سماجی کارکنوں کی قیادت میں، جذباتی مدد فراہم کرنا۔" }, hi: { title: "मानसिक स्वास्थ्य सहायता", tag: "स्वास्थ्य", desc: "भावनात्मक समर्थन प्रदान करना।" }, ne: { title: "मानसिक स्वास्थ्य समर्थन", tag: "स्वास्थ्य", desc: "भावनात्मक समर्थन प्रदान गर्दै।" } },
             { img: "https://picsum.photos/id/195/400/200", zh: { title: "房屋津貼申請工作坊", tag: "福利", desc: "協助合資格的少數族裔填寫及提交政府資助申請。" }, en: { title: "Housing Subsidy Workshop", tag: "Welfare", desc: "Assist eligible individuals in applying for gov subsidies." }, ur: { title: "ہاؤسنگ سبسڈی ورکشاپ", tag: "فلاح", desc: "سرکاری سبسڈی کے لیے درخواست دینے میں مدد کریں۔" }, hi: { title: "आवास सब्सिडी कार्यशाला", tag: "कल्याण", desc: "सरकारी सब्सिडी के लिए आवेदन करने में सहायता।" }, ne: { title: "आवास सब्सिडी कार्यशाला", tag: "कल्याण", desc: "सरकारी सब्सिडीको लागि आवेदन दिन सहयोग गर्नुहोस्।" } },
             { img: "https://picsum.photos/id/325/400/200", zh: { title: "自由工作者成功經驗分享", tag: "活動", desc: "邀請資深 Slasher 分享如何在多個行業中取得平衡。" }, en: { title: "Success Sharing Session", tag: "Event", desc: "Invite senior slashers to share their success stories." }, ur: { title: "کامیابی کا اشتراک", tag: "ایونٹ", desc: "سینئر سلیشرز کو اپنی کامیابی کی کہانیاں شیئر کرنے کی دعوت دیں۔" }, hi: { title: "सफलता साझा करना", tag: "इवेंट", desc: "वरिष्ठ स्लैशर्स को आमंत्रित करें।" }, ne: { title: "सफलता साझेदारी", tag: "घटना", desc: "वरिष्ठ स्ल्यासरहरूलाई आमन्त्रित गर्नुहोस्।" } }
         ];
 
         function toggleDarkMode() { document.documentElement.classList.toggle('dark'); }
-        function openLoginModal() { if(!isLoggedIn) { const m = document.getElementById('login-modal'); if(m) m.classList.remove('hidden'); } }
+        
+        // 帶入按鈕元素的登入彈窗邏輯
+        function openLoginModal(btnEvent) { 
+            if(!isLoggedIn) { 
+                const m = document.getElementById('login-modal'); 
+                if(m) {
+                    if(btnEvent) {
+                        const box = m.querySelector('.bg-white');
+                        const rect = btnEvent.getBoundingClientRect();
+                        const scrollY = window.scrollY || document.documentElement.scrollTop;
+                        box.style.marginTop = `${Math.max(20, rect.top + scrollY - 20)}px`;
+                    }
+                    m.classList.remove('hidden'); 
+                } 
+            } 
+        }
+
         function simulateLogin() {
             isLoggedIn = true;
             const m = document.getElementById('login-modal');
@@ -181,7 +196,8 @@
             renderPage(currentLang);
         }
 
-        function openCourseModal(index) {
+        // 帶入按鈕元素的課程彈窗邏輯
+        function openCourseModal(index, btnEvent) {
             const c = mockEducation[index][currentLang];
             const safeSet = (id, text) => { const el = document.getElementById(id); if(el) el.innerText = text; }
             safeSet('modal-tag', c.tag);
@@ -195,8 +211,18 @@
             if(list) list.innerHTML = c.syllabus.map(i => `<li>${i}</li>`).join('');
             
             const modal = document.getElementById('course-modal');
+            
+            if (btnEvent) {
+                const innerBox = modal.querySelector('.bg-white');
+                const rect = btnEvent.getBoundingClientRect();
+                const scrollY = window.scrollY || document.documentElement.scrollTop;
+                innerBox.style.marginTop = `${Math.max(20, rect.top + scrollY - 100)}px`;
+                innerBox.style.marginBottom = '40px'; 
+            }
+            
             if(modal) modal.classList.remove('hidden');
         }
+
         function closeModal() { const m = document.getElementById('course-modal'); if(m) m.classList.add('hidden'); }
         function showDemoAlert() { alert("【Demo】此為原型系統，真實功能將在後續接入。"); }
 
@@ -280,7 +306,7 @@
                             <span class="text-sm font-semibold dark:text-white" dir="ltr">Hi, Ali</span>
                         </div>`;
                 } else {
-                    authSection.innerHTML = `<button onclick="openLoginModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-1.5 rounded-full text-sm font-semibold transition-colors">${ui.loginBtn}</button>`;
+                    authSection.innerHTML = `<button onclick="openLoginModal(this)" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-1.5 rounded-full text-sm font-semibold transition-colors">${ui.loginBtn}</button>`;
                 }
             }
 
@@ -297,7 +323,8 @@
                                 <h3 class="text-lg font-bold text-gray-800 dark:text-white mt-3">${edu[lang].title}</h3>
                                 <p class="text-gray-600 dark:text-gray-300 text-sm mt-2">${edu[lang].desc}</p>
                             </div>
-                            <button onclick="openCourseModal(${idx})" class="text-blue-600 dark:text-blue-400 font-semibold text-sm flex items-center mt-4 bg-transparent border-none cursor-pointer p-0">
+                            <!-- 修改此處，將 this 傳遞給 JS -->
+                            <button onclick="openCourseModal(${idx}, this)" class="text-blue-600 dark:text-blue-400 font-semibold text-sm flex items-center mt-4 bg-transparent border-none cursor-pointer p-0">
                                 ${ui.learnBtn} <span class="mx-1">→</span>
                             </button>
                         </div>
