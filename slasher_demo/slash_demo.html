@@ -38,15 +38,11 @@
                     <option value="hi">हिन्दी</option>
                     <option value="ne">नेपाली</option>
                 </select>
-
-                <div id="auth-section">
-                    <button onclick="openLoginModal(this)" id="ui-login-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-1.5 rounded-full text-sm font-semibold transition-colors">登入</button>
-                </div>
             </div>
         </div>
     </nav>
 
-    <header id="hero-section" class="bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-900 dark:to-purple-900 text-white py-16 transition-colors">
+    <header id="hero-section" class="hidden bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-900 dark:to-purple-900 text-white py-16 transition-colors">
         <div class="max-w-6xl mx-auto px-4 text-center">
             <h1 class="text-4xl md:text-5xl font-extrabold mb-4" id="ui-hero-title">釋放潛力，多元文化自由職客</h1>
             <p class="text-lg md:text-xl opacity-90 mb-8" id="ui-hero-desc">專為香港少數族裔打造的靈活就業、教育資源與社區支持平台。</p>
@@ -96,40 +92,42 @@
         <p id="ui-footer">© 2026 EM Slasher Hub Prototype. Demo Only.</p>
     </footer>
 
-    <!-- 將 fixed 更改為 absolute，items-center 更改為 items-start -->
-    <div id="login-modal" class="absolute inset-0 bg-gray-900 bg-opacity-60 z-[100] hidden flex items-start justify-center p-4" onclick="if(event.target === this) document.getElementById('login-modal').classList.add('hidden')">
-        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-sm p-6 relative">
-            <button onclick="document.getElementById('login-modal').classList.add('hidden')" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-            </button>
-            <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6 text-center" id="ui-login-title">平台登入</h3>
-            <input type="text" placeholder="Email / Phone" class="w-full mb-4 px-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
-            <input type="password" placeholder="Password" class="w-full mb-6 px-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
-            <button onclick="simulateLogin()" id="ui-login-submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 rounded-lg transition-colors">登入</button>
-        </div>
-    </div>
-
-    <!-- 將 fixed 更改為 absolute，items-center 更改為 items-start -->
+    <!-- 教育資源彈窗 (包含 YouTube 影片) -->
     <div id="course-modal" class="absolute inset-0 bg-gray-900 bg-opacity-60 z-[100] hidden flex items-start justify-center p-4 fade-in" onclick="if(event.target === this) closeModal()">
         <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto no-scrollbar relative">
             <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-red-500 bg-white dark:bg-gray-700 rounded-full p-2 shadow-sm z-10 border border-gray-200 dark:border-gray-600">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
-            <div class="w-full h-48 md:h-64 bg-blue-100 dark:bg-gray-700 rounded-t-2xl flex items-center justify-center relative">
-                <svg class="w-16 h-16 text-blue-500 opacity-80" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-            </div>
+            
+            <!-- YouTube iframe 替代了原本的背景圖 -->
+            <iframe id="modal-video" class="w-full h-64 md:h-80 rounded-t-2xl" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            
             <div class="p-6 md:p-8">
                 <span id="modal-tag" class="px-3 py-1 bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-200 rounded-full text-xs font-semibold mb-3 inline-block"></span>
                 <h3 id="modal-title" class="text-2xl font-bold text-gray-800 dark:text-white mb-2"></h3>
                 <p id="modal-desc" class="text-gray-600 dark:text-gray-300 mb-6"></p>
-                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-5 mb-6 border border-gray-100 dark:border-gray-600">
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-5 border border-gray-100 dark:border-gray-600">
                     <h4 id="modal-syllabus-title" class="font-bold text-gray-800 dark:text-white mb-3 text-lg"></h4>
                     <ul id="modal-syllabus-list" class="space-y-2 text-sm text-gray-600 dark:text-gray-300 list-disc list-inside"></ul>
                 </div>
-                <div class="flex gap-4">
-                    <button onclick="closeModal()" id="modal-close-btn" class="w-1/3 bg-gray-100 dark:bg-gray-600 hover:bg-gray-200 dark:hover:bg-gray-500 text-gray-700 dark:text-white font-bold py-3 rounded-lg border border-gray-200 dark:border-gray-500"></button>
-                    <button onclick="showDemoAlert(currentLang)" id="modal-btn" class="w-2/3 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg shadow-md"></button>
-                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 社區活動介紹彈窗 (純介紹，無報名) -->
+    <div id="community-modal" class="absolute inset-0 bg-gray-900 bg-opacity-60 z-[100] hidden flex items-start justify-center p-4 fade-in" onclick="if(event.target === this) closeModal()">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto no-scrollbar relative">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-red-500 bg-white dark:bg-gray-700 rounded-full p-2 shadow-sm z-10 border border-gray-200 dark:border-gray-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <img id="comm-modal-img" src="" class="w-full h-48 object-cover rounded-t-2xl">
+            <div class="p-6 md:p-8">
+                <span id="comm-modal-tag" class="px-3 py-1 bg-emerald-50 dark:bg-emerald-900 text-emerald-600 dark:text-emerald-200 rounded-full text-xs font-semibold mb-3 inline-block"></span>
+                <h3 id="comm-modal-title" class="text-2xl font-bold text-gray-800 dark:text-white mb-4"></h3>
+                <p id="comm-modal-desc" class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed"></p>
+                <button onclick="closeModal()" class="w-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-white font-bold py-3 rounded-lg transition-colors border border-gray-200 dark:border-gray-600">
+                    關閉介紹
+                </button>
             </div>
         </div>
     </div>
@@ -137,81 +135,81 @@
     <script>
         let currentLang = 'zh';
         let currentFilter = 'All';
-        let isLoggedIn = false;
 
         const uiTranslations = {
-            zh: { logoTitle: "Slasher 資源平台", heroTitle: "釋放潛力，多元文化自由職客", heroDesc: "專為香港少數族裔打造的靈活就業、教育資源與社區支持平台。", jobTitle: "💼 Slasher 就業機會", eduTitle: "📚 教育資源", comTitle: "🤝 社區支持", applyBtn: "立即申請", learnBtn: "查看詳情", joinBtn: "參與社區", loginBtn: "登入", loginTitle: "平台登入", fltAll: "全部", fltTrans: "翻譯", fltRemote: "遠程", fltIt: "IT支援", fltEdu: "教育", fltTour: "旅遊", syllabusTitle: "課程大綱", enrollBtn: "立即報名", closeBtn: "關閉" },
-            en: { logoTitle: "EM Slasher Hub", heroTitle: "Unlock Your Potential as a Slasher", heroDesc: "Flexible jobs, education, and community support for Ethnic Minorities.", jobTitle: "💼 Job Opportunities", eduTitle: "📚 Educational Resources", comTitle: "🤝 Community Support", applyBtn: "Apply Now", learnBtn: "Details", joinBtn: "Join", loginBtn: "Login", loginTitle: "Account Login", fltAll: "All", fltTrans: "Translation", fltRemote: "Remote", fltIt: "IT", fltEdu: "Education", fltTour: "Tourism", syllabusTitle: "Syllabus", enrollBtn: "Enroll", closeBtn: "Close" },
-            ur: { logoTitle: "سلیشر پلیٹ فارم", heroTitle: "اپنی صلاحیتوں کو اجاگر کریں", heroDesc: "لچکدار ملازمتوں، تعلیم اور کمیونٹی سپورٹ کا پلیٹ فارم۔", jobTitle: "💼 ملازمت کے مواقع", eduTitle: "📚 تعلیمی وسائل", comTitle: "🤝 کمیونٹی سپورٹ", applyBtn: "اپلائی کریں", learnBtn: "تفصیلات", joinBtn: "شامل ہوں", loginBtn: "لاگ ان", loginTitle: "لاگ ان کریں", fltAll: "سب", fltTrans: "ترجمہ", fltRemote: "ریموٹ", fltIt: "آئی ٹی", fltEdu: "تعلیم", fltTour: "سیاحت", syllabusTitle: "نصاب", enrollBtn: "داخلہ لیں", closeBtn: "بند کریں" },
-            hi: { logoTitle: "स्लैशर मंच", heroTitle: "अपनी क्षमता को अनलॉक करें", heroDesc: "लचीली नौकरियों, शिक्षा और सामुदायिक सहायता का मंच।", jobTitle: "💼 नौकरी के अवसर", eduTitle: "📚 शैक्षिक संसाधन", comTitle: "🤝 सामुदायिक सहायता", applyBtn: "आवेदन करें", learnBtn: "विवरण", joinBtn: "जुड़ें", loginBtn: "लॉग इन", loginTitle: "लॉग इन करें", fltAll: "सभी", fltTrans: "अनुवाद", fltRemote: "रिमोट", fltIt: "आईटी", fltEdu: "शिक्षा", fltTour: "पर्यटन", syllabusTitle: "पाठ्यक्रम", enrollBtn: "नामांकन", closeBtn: "बंद करें" },
-            ne: { logoTitle: "स्ल्यासर प्लेटफर्म", heroTitle: "आफ्नो क्षमता अनलक गर्नुहोस्", heroDesc: "लचिलो रोजगार, शिक्षा र सामुदायिक समर्थन प्लेटफर्म।", jobTitle: "💼 रोजगार अवसरहरू", eduTitle: "📚 शैक्षिक संसाधन", comTitle: "🤝 सामुदायिक समर्थन", applyBtn: "आवेदन दिनुहोस्", learnBtn: "विवरण", joinBtn: "सामेल हुनुहोस्", loginBtn: "लगइन", loginTitle: "लगइन", fltAll: "सबै", fltTrans: "अनुवाद", fltRemote: "रिमोट", fltIt: "आईटी", fltEdu: "शिक्षा", fltTour: "पर्यटन", syllabusTitle: "पाठ्यक्रम", enrollBtn: "भर्ना", closeBtn: "बन्द गर्नुहोस्" }
+            zh: { logoTitle: "Slasher 資源平台", heroTitle: "釋放潛力，多元文化自由職客", heroDesc: "專為香港少數族裔打造的靈活就業、教育資源與社區支持平台。", jobTitle: "💼 Slasher 就業機會", eduTitle: "📚 教育資源", comTitle: "🤝 社區支持", applyBtn: "立即申請", learnBtn: "觀看影片", joinBtn: "了解詳情", fltAll: "全部", fltTrans: "翻譯", fltRemote: "遠程", fltIt: "IT支援", fltEdu: "教育", fltTour: "旅遊", syllabusTitle: "課程大綱", closeBtn: "關閉" },
+            en: { logoTitle: "EM Slasher Hub", heroTitle: "Unlock Your Potential as a Slasher", heroDesc: "Flexible jobs, education, and community support for Ethnic Minorities.", jobTitle: "💼 Job Opportunities", eduTitle: "📚 Educational Resources", comTitle: "🤝 Community Support", applyBtn: "Apply Now", learnBtn: "Watch Video", joinBtn: "View Details", fltAll: "All", fltTrans: "Translation", fltRemote: "Remote", fltIt: "IT", fltEdu: "Education", fltTour: "Tourism", syllabusTitle: "Syllabus", closeBtn: "Close" },
+            ur: { logoTitle: "سلیشر پلیٹ فارم", heroTitle: "اپنی صلاحیتوں کو اجاگر کریں", heroDesc: "لچکدار ملازمتوں، تعلیم اور کمیونٹی سپورٹ کا پلیٹ فارم۔", jobTitle: "💼 ملازمت کے مواقع", eduTitle: "📚 تعلیمی وسائل", comTitle: "🤝 کمیونٹی سپورٹ", applyBtn: "اپلائی کریں", learnBtn: "ویڈیو دیکھیں", joinBtn: "تفصیلات دیکھیں", fltAll: "سب", fltTrans: "ترجمہ", fltRemote: "ریموٹ", fltIt: "آئی ٹی", fltEdu: "تعلیم", fltTour: "سیاحت", syllabusTitle: "نصاب", closeBtn: "بند کریں" },
+            hi: { logoTitle: "स्लैशर मंच", heroTitle: "अपनी क्षमता को अनलॉक करें", heroDesc: "लचीली नौकरियों, शिक्षा और सामुदायिक सहायता का मंच।", jobTitle: "💼 नौकरी के अवसर", eduTitle: "📚 शैक्षिक संसाधन", comTitle: "🤝 सामुदायिक सहायता", applyBtn: "आवेदन करें", learnBtn: "वीडियो देखें", joinBtn: "विवरण देखें", fltAll: "सभी", fltTrans: "अनुवाद", fltRemote: "रिमोट", fltIt: "आईटी", fltEdu: "शिक्षा", fltTour: "पर्यटन", syllabusTitle: "पाठ्यक्रम", closeBtn: "बंद करें" },
+            ne: { logoTitle: "स्ल्यासर प्लेटफर्म", heroTitle: "आफ्नो क्षमता अनलक गर्नुहोस्", heroDesc: "लचिलो रोजगार, शिक्षा र सामुदायिक समर्थन प्लेटफर्म।", jobTitle: "💼 रोजगार अवसरहरू", eduTitle: "📚 शैक्षिक संसाधन", comTitle: "🤝 सामुदायिक समर्थन", applyBtn: "आवेदन दिनुहोस्", learnBtn: "भिडियो हेर्नुहोस्", joinBtn: "विवरण हेर्नुहोस्", fltAll: "सबै", fltTrans: "अनुवाद", fltRemote: "रिमोट", fltIt: "आईटी", fltEdu: "शिक्षा", fltTour: "पर्यटन", syllabusTitle: "पाठ्यक्रम", closeBtn: "बन्द गर्नुहोस्" }
         };
 
         const mockJobs = [
-            { category: "Translation", img: "https://picsum.photos/id/20/400/200", zh: { title: "烏爾都語醫療翻譯", tag: "翻譯", pay: "HK$ 150/小時", desc: "協助本地診所進行日常醫患溝通。" }, en: { title: "Urdu Medical Interpreter", tag: "Translation", pay: "HK$ 150/hr", desc: "Assist local clinics with daily patient communication." }, ur: { title: "میڈیکل مترجم", tag: "ترجمہ", pay: "HK$ 150/hr", desc: "مقامی کلینکس میں مریضوں سے رابطے میں مدد کریں۔" }, hi: { title: "चिकित्सा दुभाषिया", tag: "अनुवाद", pay: "HK$ 150/hr", desc: "स्थानीय क्लीनिकों को रोगियों के साथ संचार में सहायता करें।" }, ne: { title: "चिकित्सा अनुवादक", tag: "अनुवाद", pay: "HK$ 150/hr", desc: "स्थानीय क्लिनिकहरूमा बिरामीहरूसँग कुराकानी गर्न मद्दत गर्नुहोस्।" } },
-            { category: "Remote", img: "https://picsum.photos/id/3/400/200", zh: { title: "多語言社交媒體客服", tag: "遠程", pay: "HK$ 80/小時", desc: "在家工作，負責回覆客戶在社交平台上的查詢。" }, en: { title: "Social Media CS", tag: "Remote", pay: "HK$ 80/hr", desc: "Work from home. Handle customer inquiries on social media." }, ur: { title: "سوشل میڈیا کسٹمر سروس", tag: "ریموٹ", pay: "HK$ 80/hr", desc: "گھر سے کام کریں۔ سوشل میڈیا پر صارفین کے سوالات سنبھالیں۔" }, hi: { title: "सोशल मीडिया ग्राहक सेवा", tag: "रिमोट", pay: "HK$ 80/hr", desc: "घर से काम करें। पूछताछ संभालें।" }, ne: { title: "सामाजिक सञ्जाल ग्राहक सेवा", tag: "रिमोट", pay: "HK$ 80/hr", desc: "घरबाट काम गर्नुहोस्। सोधपुछ ह्यान्डल गर्नुहोस्।" } },
-            { category: "IT", img: "https://picsum.photos/id/0/400/200", zh: { title: "兼職網頁維護員", tag: "IT支援", pay: "HK$ 200/小時", desc: "為少數族裔非牟利機構提供基礎網頁更新。" }, en: { title: "Web Maintainer", tag: "IT Support", pay: "HK$ 200/hr", desc: "Provide basic web updates for EM NGOs." }, ur: { title: "ویب مینٹینر", tag: "آئی ٹی", pay: "HK$ 200/hr", desc: "این جی اوز کے لیے بنیادی ویب اپ ڈیٹس فراہم کریں۔" }, hi: { title: "वेब मेंटेनर", tag: "आईटी", pay: "HK$ 200/hr", desc: "बुनियादी वेब अपडेट प्रदान करें।" }, ne: { title: "वेब मर्मतकर्ता", tag: "आईटी", pay: "HK$ 200/hr", desc: "वेब अपडेटहरू प्रदान गर्नुहोस्।" } },
-            { category: "Tourism", img: "https://picsum.photos/id/122/400/200", zh: { title: "跨文化美食導賞員", tag: "旅遊", pay: "HK$ 800/次", desc: "帶領遊客探索尖沙咀少數族裔美食文化。" }, en: { title: "Food Tour Guide", tag: "Tourism", pay: "HK$ 800/tour", desc: "Lead tourists to explore ethnic food culture." }, ur: { title: "فوڈ ٹور گائیڈ", tag: "سیاحت", pay: "HK$ 800/tour", desc: "سیاحوں کو کھانوں کی ثقافت دریافت کرنے میں رہنمائی کریں۔" }, hi: { title: "खाद्य टूर गाइड", tag: "पर्यटन", pay: "HK$ 800/tour", desc: "पर्यटकों को खाद्य संस्कृति का पता लगाने के लिए मार्गदर्शन करें।" }, ne: { title: "खाना टुर गाइड", tag: "पर्यटन", pay: "HK$ 800/tour", desc: "पर्यटकहरूलाई खाना संस्कृति अन्वेषण गर्न मार्गदर्शन गर्नुहोस्।" } },
-            { category: "Education", img: "https://picsum.photos/id/24/400/200", zh: { title: "英語/烏爾都語私人導師", tag: "教育", pay: "HK$ 250/小時", desc: "為區內小學生提供課後功課輔導。" }, en: { title: "Private Language Tutor", tag: "Education", pay: "HK$ 250/hr", desc: "Provide after-school homework tutoring for primary students." }, ur: { title: "پرائیویٹ ٹیوٹر", tag: "تعلیم", pay: "HK$ 250/hr", desc: "پرائمری طلباء کے لیے اسکول کے بعد ہوم ورک ٹیوشن فراہم کریں۔" }, hi: { title: "निजी ट्यूटर", tag: "शिक्षा", pay: "HK$ 250/hr", desc: "छात्रों के लिए स्कूल के बाद होमवर्क ट्यूशन।" }, ne: { title: "निजी ट्युटर", tag: "शिक्षा", pay: "HK$ 250/hr", desc: "विद्यार्थीहरूको लागि स्कूल पछि गृहकार्य ट्यूशन।" } }
+            { category: "Translation", img: "https://picsum.photos/id/20/400/200", link: "https://hk.jobsdb.com/hk/search-jobs/urdu", zh: { title: "烏爾都語醫療翻譯", tag: "翻譯", pay: "HK$ 150/小時", desc: "協助本地診所進行日常醫患溝通。" }, en: { title: "Urdu Medical Interpreter", tag: "Translation", pay: "HK$ 150/hr", desc: "Assist local clinics with daily patient communication." }, ur: { title: "میڈیکل مترجم", tag: "ترجمہ", pay: "HK$ 150/hr", desc: "مقامی کلینکس میں مریضوں سے رابطے میں مدد کریں۔" }, hi: { title: "चिकित्सा दुभाषिया", tag: "अनुवाद", pay: "HK$ 150/hr", desc: "स्थानीय क्लीनिकों को रोगियों के साथ संचार में सहायता करें।" }, ne: { title: "चिकित्सा अनुवादक", tag: "अनुवाद", pay: "HK$ 150/hr", desc: "स्थानीय क्लिनिकहरूमा बिरामीहरूसँग कुराकानी गर्न मद्दत गर्नुहोस्।" } },
+            { category: "Remote", img: "https://picsum.photos/id/3/400/200", link: "https://hk.jobsdb.com/hk/search-jobs/customer-service", zh: { title: "多語言社交媒體客服", tag: "遠程", pay: "HK$ 80/小時", desc: "在家工作，負責回覆客戶在社交平台上的查詢。" }, en: { title: "Social Media CS", tag: "Remote", pay: "HK$ 80/hr", desc: "Work from home. Handle customer inquiries on social media." }, ur: { title: "سوشل میڈیا کسٹمر سروس", tag: "ریموٹ", pay: "HK$ 80/hr", desc: "گھر سے کام کریں۔ سوشل میڈیا پر صارفین کے سوالات سنبھالیں۔" }, hi: { title: "सोशल मीडिया ग्राहक सेवा", tag: "रिमोट", pay: "HK$ 80/hr", desc: "घर से काम करें। पूछताछ संभालें।" }, ne: { title: "सामाजिक सञ्जाल ग्राहक सेवा", tag: "रिमोट", pay: "HK$ 80/hr", desc: "घरबाट काम गर्नुहोस्। सोधपुछ ह्यान्डल गर्नुहोस्।" } },
+            { category: "IT", img: "https://picsum.photos/id/0/400/200", link: "https://hk.jobsdb.com/hk/search-jobs/part-time-it", zh: { title: "兼職網頁維護員", tag: "IT支援", pay: "HK$ 200/小時", desc: "為少數族裔非牟利機構提供基礎網頁更新。" }, en: { title: "Web Maintainer", tag: "IT Support", pay: "HK$ 200/hr", desc: "Provide basic web updates for EM NGOs." }, ur: { title: "ویب مینٹینر", tag: "آئی ٹی", pay: "HK$ 200/hr", desc: "این جی اوز کے لیے بنیادی ویب اپ ڈیٹس فراہم کریں۔" }, hi: { title: "वेब मेंटेनर", tag: "आईटी", pay: "HK$ 200/hr", desc: "बुनियादी वेब अपडेट प्रदान करें।" }, ne: { title: "वेब मर्मतकर्ता", tag: "आईटी", pay: "HK$ 200/hr", desc: "वेब अपडेटहरू प्रदान गर्नुहोस्।" } },
+            { category: "Tourism", img: "https://picsum.photos/id/122/400/200", link: "https://hk.jobsdb.com/hk/search-jobs/tour-guide", zh: { title: "跨文化美食導賞員", tag: "旅遊", pay: "HK$ 800/次", desc: "帶領遊客探索尖沙咀少數族裔美食文化。" }, en: { title: "Food Tour Guide", tag: "Tourism", pay: "HK$ 800/tour", desc: "Lead tourists to explore ethnic food culture." }, ur: { title: "فوڈ ٹور گائیڈ", tag: "سیاحت", pay: "HK$ 800/tour", desc: "سیاحوں کو کھانوں کی ثقافت دریافت کرنے میں رہنمائی کریں۔" }, hi: { title: "खाद्य टूर गाइड", tag: "पर्यटन", pay: "HK$ 800/tour", desc: "पर्यटकों को खाद्य संस्कृति का पता लगाने के लिए मार्गदर्शन करें।" }, ne: { title: "खाना टुर गाइड", tag: "पर्यटन", pay: "HK$ 800/tour", desc: "पर्यटकहरूलाई खाना संस्कृति अन्वेषण गर्न मार्गदर्शन गर्नुहोस्।" } },
+            { category: "Education", img: "https://picsum.photos/id/24/400/200", link: "https://hk.jobsdb.com/hk/search-jobs/tutor", zh: { title: "英語/烏爾都語私人導師", tag: "教育", pay: "HK$ 250/小時", desc: "為區內小學生提供課後功課輔導。" }, en: { title: "Private Language Tutor", tag: "Education", pay: "HK$ 250/hr", desc: "Provide after-school homework tutoring for primary students." }, ur: { title: "پرائیویٹ ٹیوٹر", tag: "تعلیم", pay: "HK$ 250/hr", desc: "پرائمری طلباء کے لیے اسکول کے بعد ہوم ورک ٹیوشن فراہم کریں۔" }, hi: { title: "निजी ट्यूटर", tag: "शिक्षा", pay: "HK$ 250/hr", desc: "छात्रों के लिए स्कूल के बाद होमवर्क ट्यूशन।" }, ne: { title: "निजी ट्युटर", tag: "शिक्षा", pay: "HK$ 250/hr", desc: "विद्यार्थीहरूको लागि स्कूल पछि गृहकार्य ट्यूशन।" } }
         ];
 
         const mockEducation = [
-            { img: "https://picsum.photos/id/36/400/200", zh: { title: "職場實用粵語班", tag: "語言", desc: "快速掌握面試及日常工作常用粵語詞彙。", syllabus: ["自我介紹與寒暄", "職場溝通與請假", "實戰對話"] }, en: { title: "Workplace Cantonese", tag: "Language", desc: "Master common Cantonese for interviews.", syllabus: ["Self-introduction", "Workplace Comm", "Dialogues"] }, ur: { title: "کینٹونیز کلاس", tag: "زبان", desc: "انٹرویوز کے لیے کینٹونیز۔", syllabus: ["تعارف", "مواصلات", "گفتگو"] }, hi: { title: "कैंटोनीज़ कक्षा", tag: "भाषा", desc: "साक्षात्कार के लिए कैंटोनीज़।", syllabus: ["परिचय", "संचार", "संवाद"] }, ne: { title: "क्यान्टोनिज कक्षा", tag: "भाषा", desc: "अन्तर्वार्ताका लागि क्यान्टोनिज।", syllabus: ["परिचय", "संचार", "संवाद"] } },
-            { img: "https://picsum.photos/id/48/400/200", zh: { title: "AI 工具與 Canva 入門", tag: "科技", desc: "學習使用 AI 工具撰寫電郵及設計個人作品集。", syllabus: ["數碼工具箱", "Canva 設計", "ChatGPT 寫作"] }, en: { title: "AI Tools & Canva", tag: "Tech", desc: "Learn to use AI for emails and portfolio design.", syllabus: ["Digital Tools", "Canva Design", "ChatGPT"] }, ur: { title: "AI ٹولز اور کینوا", tag: "ٹیک", desc: "ای میلز اور ڈیزائن کے لیے AI۔", syllabus: ["ڈیجیٹل ٹولز", "کینوا ڈیزائن", "ChatGPT"] }, hi: { title: "AI उपकरण और कैनवा", tag: "तकनीक", desc: "डिज़ाइन के लिए AI।", syllabus: ["उपकरण", "कैनवा", "ChatGPT"] }, ne: { title: "AI उपकरणहरू र क्यानभा", tag: "प्रविधि", desc: "डिजाइनको लागि AI।", syllabus: ["उपकरणहरू", "क्यानभा", "ChatGPT"] } },
-            { img: "https://picsum.photos/id/119/400/200", zh: { title: "創業與稅務工作坊", tag: "技能", desc: "教你如何合法合規地處理個人業務稅務。", syllabus: ["商業登記流程", "Slasher 報稅概念", "社交媒體營銷"] }, en: { title: "Tax & Business Workshop", tag: "Skill", desc: "Learn how to handle personal business taxes legally.", syllabus: ["Business Registration", "Tax Basics", "Social Media"] }, ur: { title: "ٹیکس ورکشاپ", tag: "مہارت", desc: "ذاتی کاروباری ٹیکس کو قانونی طور پر سنبھالنے کا طریقہ سیکھیں۔", syllabus: ["بزنس رجسٹریشن", "ٹیکس کی بنیادی باتیں", "مارکیٹنگ"] }, hi: { title: "कर कार्यशाला", tag: "कौशल", desc: "व्यापार करों को कानूनी रूप से संभालना सीखें।", syllabus: ["पंजीकरण", "कर की मूल बातें", "मार्केटिंग"] }, ne: { title: "कर कार्यशाला", tag: "सीप", desc: "व्यापार करहरू कानुनी रूपमा ह्यान्डल गर्न सिक्नुहोस्।", syllabus: ["दर्ता", "करको आधारभूत कुराहरू", "मार्केटिङ"] } },
-            { img: "https://picsum.photos/id/60/400/200", zh: { title: "客戶服務溝通技巧", tag: "職業", desc: "學習應對不同文化背景客戶的專業溝通技巧。", syllabus: ["服務業禮儀", "處理投訴", "情景演練"] }, en: { title: "Customer Service Skills", tag: "Career", desc: "Learn professional skills to handle diverse customers.", syllabus: ["Service Etiquette", "Handling Complaints", "Role-play"] }, ur: { title: "کسٹمر سروس کی مہارتیں", tag: "پیشہ", desc: "مختلف پس منظر کے صارفین سے نمٹنے کے لیے مہارتیں۔", syllabus: ["سروس آداب", "شکایات کو سنبھالنا", "عملی مشقیں"] }, hi: { title: "ग्राहक सेवा कौशल", tag: "पेशा", desc: "विविध ग्राहकों को संभालने के लिए कौशल सीखें।", syllabus: ["शिष्टाचार", "शिकायतों को संभालना", "अभ्यास"] }, ne: { title: "ग्राहक सेवा सीपहरू", tag: "क्यारियर", desc: "विविध ग्राहकहरूलाई ह्यान्डल गर्न सीपहरू सिक्नुहोस्।", syllabus: ["शिष्टाचार", "उजुरीहरू ह्यान्डल गर्दै", "अभ्यास"] } },
-            { img: "https://picsum.photos/id/96/400/200", zh: { title: "基礎 Python 與數據處理", tag: "IT", desc: "針對新手的基礎編程課程，提升辦公自動化能力。", syllabus: ["Python 基礎語法", "數據錄入與清洗", "自動化腳本"] }, en: { title: "Basic Python & Data", tag: "IT", desc: "Beginner coding course for office automation.", syllabus: ["Python Basics", "Data Cleaning", "Automation Scripts"] }, ur: { title: "بنیادی ازگر اور ڈیٹا", tag: "آئی ٹی", desc: "آفس آٹومیشن کے لیے کوڈنگ کا کورس۔", syllabus: ["ازگر کی بنیادی باتیں", "ڈیٹا کی صفائی", "اسکرپٹس"] }, hi: { title: "बुनियादी पायथन और डेटा", tag: "आईटी", desc: "कार्यालय स्वचालन के लिए कोडिंग पाठ्यक्रम।", syllabus: ["पायथन की मूल बातें", "डेटा की सफाई", "स्क्रिप्ट"] }, ne: { title: "आधारभूत पाइथन र डाटा", tag: "आईटी", desc: "कार्यालय स्वचालनको लागि कोडिङ पाठ्यक्रम।", syllabus: ["पाइथनको आधारभूत कुराहरू", "डाटा सफाई", "लिपिहरू"] } }
+            // 注意这里的 videoUrl 都是真实的 YouTube 嵌入链接，你可以自行替换
+            { img: "https://picsum.photos/id/36/400/200", videoUrl: "https://www.youtube.com/embed/g2bUqP_rXyI", zh: { title: "職場實用粵語班", tag: "語言", desc: "快速掌握面試及日常工作常用粵語詞彙。", syllabus: ["自我介紹與寒暄", "職場溝通與請假", "實戰對話"] }, en: { title: "Workplace Cantonese", tag: "Language", desc: "Master common Cantonese for interviews.", syllabus: ["Self-introduction", "Workplace Comm", "Dialogues"] }, ur: { title: "کینٹونیز کلاس", tag: "زبان", desc: "انٹرویوز کے لیے کینٹونیز۔", syllabus: ["تعارف", "مواصلات", "گفتگو"] }, hi: { title: "कैंटोनीज़ कक्षा", tag: "भाषा", desc: "साक्षात्कार के लिए कैंटोनीज़।", syllabus: ["परिचय", "संचार", "संवाद"] }, ne: { title: "क्यान्टोनिज कक्षा", tag: "भाषा", desc: "अन्तर्वार्ताका लागि क्यान्टोनिज।", syllabus: ["परिचय", "संचार", "संवाद"] } },
+            { img: "https://picsum.photos/id/48/400/200", videoUrl: "https://www.youtube.com/embed/zJSY8tbf_ys", zh: { title: "AI 工具與 Canva 入門", tag: "科技", desc: "學習使用 AI 工具撰寫電郵及設計個人作品集。", syllabus: ["數碼工具箱", "Canva 設計", "ChatGPT 寫作"] }, en: { title: "AI Tools & Canva", tag: "Tech", desc: "Learn to use AI for emails and portfolio design.", syllabus: ["Digital Tools", "Canva Design", "ChatGPT"] }, ur: { title: "AI ٹولز اور کینوا", tag: "ٹیک", desc: "ای میلز اور ڈیزائن کے لیے AI۔", syllabus: ["ڈیجیٹل ٹولز", "کینوا ڈیزائن", "ChatGPT"] }, hi: { title: "AI उपकरण और कैनवा", tag: "तकनीक", desc: "डिज़ाइन के लिए AI।", syllabus: ["उपकरण", "कैनवा", "ChatGPT"] }, ne: { title: "AI उपकरणहरू र क्यानभा", tag: "प्रविधि", desc: "डिजाइनको लागि AI।", syllabus: ["उपकरणहरू", "क्यानभा", "ChatGPT"] } },
+            { img: "https://picsum.photos/id/119/400/200", videoUrl: "https://www.youtube.com/embed/kYjBq9yP_QY", zh: { title: "創業與稅務工作坊", tag: "技能", desc: "教你如何合法合規地處理個人業務稅務。", syllabus: ["商業登記流程", "Slasher 報稅概念", "社交媒體營銷"] }, en: { title: "Tax & Business Workshop", tag: "Skill", desc: "Learn how to handle personal business taxes legally.", syllabus: ["Business Registration", "Tax Basics", "Social Media"] }, ur: { title: "ٹیکس ورکشاپ", tag: "مہارت", desc: "ذاتی کاروباری ٹیکس کو قانونی طور پر سنبھالنے کا طریقہ سیکھیں۔", syllabus: ["بزنس رجسٹریشن", "ٹیکس کی بنیادی باتیں", "مارکیٹنگ"] }, hi: { title: "कर कार्यशाला", tag: "कौशल", desc: "व्यापार करों को कानूनी रूप से संभालना सीखें।", syllabus: ["पंजीकरण", "कर की मूल बातें", "मार्केटिंग"] }, ne: { title: "कर कार्यशाला", tag: "सीप", desc: "व्यापार करहरू कानुनी रूपमा ह्यान्डल गर्न सिक्नुहोस्।", syllabus: ["दर्ता", "करको आधारभूत कुराहरू", "मार्केटिङ"] } },
+            { img: "https://picsum.photos/id/60/400/200", videoUrl: "https://www.youtube.com/embed/S2C1e712yI8", zh: { title: "客戶服務溝通技巧", tag: "職業", desc: "學習應對不同文化背景客戶的專業溝通技巧。", syllabus: ["服務業禮儀", "處理投訴", "情景演練"] }, en: { title: "Customer Service Skills", tag: "Career", desc: "Learn professional skills to handle diverse customers.", syllabus: ["Service Etiquette", "Handling Complaints", "Role-play"] }, ur: { title: "کسٹمر سروس کی مہارتیں", tag: "پیشہ", desc: "مختلف پس منظر کے صارفین سے نمٹنے کے لیے مہارتیں۔", syllabus: ["سروس آداب", "شکایات کو سنبھالنا", "عملی مشقیں"] }, hi: { title: "ग्राहक सेवा कौशल", tag: "पेशा", desc: "विविध ग्राहकों को संभालने के लिए कौशल सीखें।", syllabus: ["शिष्टाचार", "शिकायतों को संभालना", "अभ्यास"] }, ne: { title: "ग्राहक सेवा सीपहरू", tag: "क्यारियर", desc: "विविध ग्राहकहरूलाई ह्यान्डल गर्न सीपहरू सिक्नुहोस्।", syllabus: ["शिष्टाचार", "उजुरीहरू ह्यान्डल गर्दै", "अभ्यास"] } },
+            { img: "https://picsum.photos/id/96/400/200", videoUrl: "https://www.youtube.com/embed/kqtD5dpn9C8", zh: { title: "基礎 Python 與數據處理", tag: "IT", desc: "針對新手的基礎編程課程，提升辦公自動化能力。", syllabus: ["Python 基礎語法", "數據錄入與清洗", "自動化腳本"] }, en: { title: "Basic Python & Data", tag: "IT", desc: "Beginner coding course for office automation.", syllabus: ["Python Basics", "Data Cleaning", "Automation Scripts"] }, ur: { title: "بنیادی ازگر اور ڈیٹا", tag: "آئی ٹی", desc: "آفس آٹومیشن کے لیے کوڈنگ کا کورس۔", syllabus: ["ازگر کی بنیادی باتیں", "ڈیٹا کی صفائی", "اسکرپٹس"] }, hi: { title: "बुनियादी पायथन और डेटा", tag: "आईटी", desc: "कार्यालय स्वचालन के लिए कोडिंग पाठ्यक्रम।", syllabus: ["पायथन की मूल बातें", "डेटा की सफाई", "स्क्रिप्ट"] }, ne: { title: "आधारभूत पाइथन र डाटा", tag: "आईटी", desc: "कार्यालय स्वचालनको लागि कोडिङ पाठ्यक्रम।", syllabus: ["पाइथनको आधारभूत कुराहरू", "डाटा सफाई", "लिपिहरू"] } }
         ];
 
         const mockCommunity = [
-            { img: "https://picsum.photos/id/175/400/200", zh: { title: "勞工權益與強積金指南", tag: "法律", desc: "了解在香港的基本合法權益及強積金保障。" }, en: { title: "Labor Rights Guide", tag: "Legal", desc: "Understand your legal rights and MPF in HK." }, ur: { title: "لیبر رائٹس گائیڈ", tag: "قانونی", desc: "اپنے قانونی حقوق اور MPF کو سمجھیں۔" }, hi: { title: "श्रम अधिकार गाइड", tag: "कानूनी", desc: "कानूनी अधिकारों को समझें।" }, ne: { title: "श्रम अधिकार गाइड", tag: "कानूनी", desc: "कानूनी अधिकारहरू बुझ्नुहोस्।" } },
-            { img: "https://picsum.photos/id/117/400/200", zh: { title: "Slasher 互助交流會", tag: "社交", desc: "線下聚會，分享接單經驗並拓展人脈網絡。" }, en: { title: "Networking Event", tag: "Social", desc: "Offline gathering to share gig experiences." }, ur: { title: "نیٹ ورکنگ ایونٹ", tag: "نیٹ ورکنگ", desc: "گگ کے تجربات شیئر کرنے کے لیے اجتماع۔" }, hi: { title: "नेटवर्किंग इवेंट", tag: "सामाजिक", desc: "अनुभव साझा करने के लिए सभा।" }, ne: { title: "नेटवर्किंग कार्यक्रम", tag: "सामाजिक", desc: "अनुभव साझा गर्न भेला।" } },
-            { img: "https://picsum.photos/id/152/400/200", zh: { title: "減壓與心理健康小組", tag: "健康", desc: "由社工帶領，為面臨壓力的 Slasher 提供情緒支援。" }, en: { title: "Mental Health Support", tag: "Health", desc: "Led by social workers, providing emotional support." }, ur: { title: "ذہنی صحت سپورٹ", tag: "صحت", desc: "سماجی کارکنوں کی قیادت میں، جذباتی مدد فراہم کرنا۔" }, hi: { title: "मानसिक स्वास्थ्य सहायता", tag: "स्वास्थ्य", desc: "भावनात्मक समर्थन प्रदान करना।" }, ne: { title: "मानसिक स्वास्थ्य समर्थन", tag: "स्वास्थ्य", desc: "भावनात्मक समर्थन प्रदान गर्दै।" } },
-            { img: "https://picsum.photos/id/195/400/200", zh: { title: "房屋津貼申請工作坊", tag: "福利", desc: "協助合資格的少數族裔填寫及提交政府資助申請。" }, en: { title: "Housing Subsidy Workshop", tag: "Welfare", desc: "Assist eligible individuals in applying for gov subsidies." }, ur: { title: "ہاؤسنگ سبسڈی ورکشاپ", tag: "فلاح", desc: "سرکاری سبسڈی کے لیے درخواست دینے میں مدد کریں۔" }, hi: { title: "आवास सब्सिडी कार्यशाला", tag: "कल्याण", desc: "सरकारी सब्सिडी के लिए आवेदन करने में सहायता।" }, ne: { title: "आवास सब्सिडी कार्यशाला", tag: "कल्याण", desc: "सरकारी सब्सिडीको लागि आवेदन दिन सहयोग गर्नुहोस्।" } },
-            { img: "https://picsum.photos/id/325/400/200", zh: { title: "自由工作者成功經驗分享", tag: "活動", desc: "邀請資深 Slasher 分享如何在多個行業中取得平衡。" }, en: { title: "Success Sharing Session", tag: "Event", desc: "Invite senior slashers to share their success stories." }, ur: { title: "کامیابی کا اشتراک", tag: "ایونٹ", desc: "سینئر سلیشرز کو اپنی کامیابی کی کہانیاں شیئر کرنے کی دعوت دیں۔" }, hi: { title: "सफलता साझा करना", tag: "इवेंट", desc: "वरिष्ठ स्लैशर्स को आमंत्रित करें।" }, ne: { title: "सफलता साझेदारी", tag: "घटना", desc: "वरिष्ठ स्ल्यासरहरूलाई आमन्त्रित गर्नुहोस्।" } }
+            { img: "https://picsum.photos/id/175/400/200", zh: { title: "勞工權益與強積金指南", tag: "法律", desc: "了解在香港的基本合法權益及強積金保障，確保你的自由職業生涯受到保護。" }, en: { title: "Labor Rights Guide", tag: "Legal", desc: "Understand your legal rights and MPF in HK." }, ur: { title: "لیبر رائٹس گائیڈ", tag: "قانونی", desc: "اپنے قانونی حقوق اور MPF کو سمجھیں۔" }, hi: { title: "श्रम अधिकार गाइड", tag: "कानूनी", desc: "कानूनी अधिकारों को समझें।" }, ne: { title: "श्रम अधिकार गाइड", tag: "कानूनी", desc: "कानूनी अधिकारहरू बुझ्नुहोस्।" } },
+            { img: "https://picsum.photos/id/117/400/200", zh: { title: "Slasher 互助交流會", tag: "社交", desc: "線下聚會，與其他少數族裔 Slasher 分享接單經驗並拓展人脈網絡。" }, en: { title: "Networking Event", tag: "Social", desc: "Offline gathering to share gig experiences." }, ur: { title: "نیٹ ورکنگ ایونٹ", tag: "نیٹ ورکنگ", desc: "گگ کے تجربات شیئر کرنے کے لیے اجتماع۔" }, hi: { title: "नेटवर्किंग इवेंट", tag: "सामाजिक", desc: "अनुभव साझा करने के लिए सभा।" }, ne: { title: "नेटवर्किंग कार्यक्रम", tag: "सामाजिक", desc: "अनुभव साझा गर्न भेला।" } },
+            { img: "https://picsum.photos/id/152/400/200", zh: { title: "減壓與心理健康小組", tag: "健康", desc: "由專業社工帶領，為面臨接單與生活壓力的 Slasher 提供情緒支援與輔導。" }, en: { title: "Mental Health Support", tag: "Health", desc: "Led by social workers, providing emotional support." }, ur: { title: "ذہنی صحت سپورٹ", tag: "صحت", desc: "سماجی کارکنوں کی قیادت میں، جذباتی مدد فراہم کرنا۔" }, hi: { title: "मानसिक स्वास्थ्य सहायता", tag: "स्वास्थ्य", desc: "भावनात्मक समर्थन प्रदान करना।" }, ne: { title: "मानसिक स्वास्थ्य समर्थन", tag: "स्वास्थ्य", desc: "भावनात्मक समर्थन प्रदान गर्दै।" } },
+            { img: "https://picsum.photos/id/195/400/200", zh: { title: "房屋津貼申請工作坊", tag: "福利", desc: "協助合資格的少數族裔填寫及提交政府資助申請，減輕居住負擔。" }, en: { title: "Housing Subsidy Workshop", tag: "Welfare", desc: "Assist eligible individuals in applying for gov subsidies." }, ur: { title: "ہاؤسنگ سبسڈی ورکشاپ", tag: "فلاح", desc: "سرکاری سبسڈی کے لیے درخواست دینے میں مدد کریں۔" }, hi: { title: "आवास सब्सिडी कार्यशाला", tag: "कल्याण", desc: "सरकारी सब्सिडी के लिए आवेदन करने में सहायता।" }, ne: { title: "आवास सब्सिडी कार्यशाला", tag: "कल्याण", desc: "सरकारी सब्सिडीको लागि आवेदन दिन सहयोग गर्नुहोस्।" } },
+            { img: "https://picsum.photos/id/325/400/200", zh: { title: "自由工作者成功經驗分享", tag: "活動", desc: "邀請資深 Slasher 分享如何在多個行業中取得平衡，建立個人品牌。" }, en: { title: "Success Sharing Session", tag: "Event", desc: "Invite senior slashers to share their success stories." }, ur: { title: "کامیابی کا اشتراک", tag: "ایونٹ", desc: "سینئر سلیشرز کو اپنی کامیابی کی کہانیاں شیئر کرنے کی دعوت دیں۔" }, hi: { title: "सफलता साझा करना", tag: "इवेंट", desc: "वरिष्ठ स्लैशर्स को आमंत्रित करें।" }, ne: { title: "सफलता साझेदारी", tag: "घटना", desc: "वरिष्ठ स्ल्यासरहरूलाई आमन्त्रित गर्नुहोस्।" } }
         ];
 
         function toggleDarkMode() { document.documentElement.classList.toggle('dark'); }
-        
-        // 帶入按鈕元素的登入彈窗邏輯
-        function openLoginModal(btnEvent) { 
-            if(!isLoggedIn) { 
-                const m = document.getElementById('login-modal'); 
-                if(m) {
-                    if(btnEvent) {
-                        const box = m.querySelector('.bg-white');
-                        const rect = btnEvent.getBoundingClientRect();
-                        const scrollY = window.scrollY || document.documentElement.scrollTop;
-                        box.style.marginTop = `${Math.max(20, rect.top + scrollY - 20)}px`;
-                    }
-                    m.classList.remove('hidden'); 
-                } 
-            } 
-        }
 
-        function simulateLogin() {
-            isLoggedIn = true;
-            const m = document.getElementById('login-modal');
-            if(m) m.classList.add('hidden');
-            renderPage(currentLang);
-        }
-
-        // 帶入按鈕元素的課程彈窗邏輯
+        // 打開教育資源影片彈窗
         function openCourseModal(index, btnEvent) {
             const c = mockEducation[index][currentLang];
+            const edu = mockEducation[index];
             const safeSet = (id, text) => { const el = document.getElementById(id); if(el) el.innerText = text; }
             safeSet('modal-tag', c.tag);
             safeSet('modal-title', c.title);
             safeSet('modal-desc', c.desc);
             safeSet('modal-syllabus-title', uiTranslations[currentLang].syllabusTitle);
-            safeSet('modal-btn', uiTranslations[currentLang].enrollBtn);
-            safeSet('modal-close-btn', uiTranslations[currentLang].closeBtn);
+            
+            // 載入 YouTube 影片
+            document.getElementById('modal-video').src = edu.videoUrl;
             
             const list = document.getElementById('modal-syllabus-list');
             if(list) list.innerHTML = c.syllabus.map(i => `<li>${i}</li>`).join('');
             
             const modal = document.getElementById('course-modal');
+            if (btnEvent) {
+                const innerBox = modal.querySelector('.bg-white');
+                const rect = btnEvent.getBoundingClientRect();
+                const scrollY = window.scrollY || document.documentElement.scrollTop;
+                innerBox.style.marginTop = `${Math.max(20, rect.top + scrollY - 150)}px`;
+                innerBox.style.marginBottom = '40px'; 
+            }
+            if(modal) modal.classList.remove('hidden');
+        }
+
+        // 打開社區活動純介紹彈窗
+        function openCommunityModal(index, btnEvent) {
+            const c = mockCommunity[index][currentLang];
+            const com = mockCommunity[index];
+            const safeSet = (id, text) => { const el = document.getElementById(id); if(el) el.innerText = text; }
             
+            safeSet('comm-modal-tag', c.tag);
+            safeSet('comm-modal-title', c.title);
+            safeSet('comm-modal-desc', c.desc);
+            document.getElementById('comm-modal-img').src = com.img;
+            
+            const modal = document.getElementById('community-modal');
             if (btnEvent) {
                 const innerBox = modal.querySelector('.bg-white');
                 const rect = btnEvent.getBoundingClientRect();
@@ -219,12 +217,19 @@
                 innerBox.style.marginTop = `${Math.max(20, rect.top + scrollY - 100)}px`;
                 innerBox.style.marginBottom = '40px'; 
             }
-            
             if(modal) modal.classList.remove('hidden');
         }
 
-        function closeModal() { const m = document.getElementById('course-modal'); if(m) m.classList.add('hidden'); }
-        function showDemoAlert() { alert("【Demo】此為原型系統，真實功能將在後續接入。"); }
+        function closeModal() { 
+            // 關閉時清空影片 src，防止背景繼續播放聲音
+            document.getElementById('modal-video').src = '';
+            
+            const m1 = document.getElementById('course-modal'); 
+            if(m1) m1.classList.add('hidden'); 
+            
+            const m2 = document.getElementById('community-modal'); 
+            if(m2) m2.classList.add('hidden'); 
+        }
 
         function filterJobs(category) {
             currentFilter = category;
@@ -266,7 +271,7 @@
                             <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2">${job[currentLang].title}</h3>
                             <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">${job[currentLang].desc}</p>
                         </div>
-                        <button onclick="showDemoAlert()" class="w-full bg-gray-50 dark:bg-gray-700 hover:bg-indigo-600 dark:hover:bg-indigo-600 hover:text-white text-indigo-600 dark:text-indigo-300 font-semibold py-2 rounded-lg transition-colors">
+                        <button onclick="window.open('${job.link}', '_blank')" class="w-full bg-gray-50 dark:bg-gray-700 hover:bg-indigo-600 dark:hover:bg-indigo-600 hover:text-white text-indigo-600 dark:text-indigo-300 font-semibold py-2 rounded-lg transition-colors">
                             ${uiTranslations[currentLang].applyBtn}
                         </button>
                     </div>
@@ -288,7 +293,6 @@
             safeSetHTML('ui-job-title', `<span class="text-2xl mr-2">💼</span> ${ui.jobTitle.replace('💼 ', '')}`);
             safeSetHTML('ui-edu-title', `<span class="text-2xl mr-2">📚</span> ${ui.eduTitle.replace('📚 ', '')}`);
             safeSetHTML('ui-com-title', `<span class="text-2xl mr-2">🤝</span> ${ui.comTitle.replace('🤝 ', '')}`);
-            safeSetText('ui-login-title', ui.loginTitle);
             
             safeSetText('flt-all', ui.fltAll);
             safeSetText('flt-trans', ui.fltTrans);
@@ -296,19 +300,6 @@
             safeSetText('flt-it', ui.fltIt);
             safeSetText('flt-edu-btn', ui.fltEdu);
             safeSetText('flt-tour', ui.fltTour);
-
-            const authSection = document.getElementById('auth-section');
-            if (authSection) {
-                if (isLoggedIn) {
-                    authSection.innerHTML = `
-                        <div class="flex items-center space-x-2 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full cursor-pointer">
-                            <div class="w-6 h-6 rounded-full bg-green-500 text-white flex items-center justify-center text-xs font-bold">A</div>
-                            <span class="text-sm font-semibold dark:text-white" dir="ltr">Hi, Ali</span>
-                        </div>`;
-                } else {
-                    authSection.innerHTML = `<button onclick="openLoginModal(this)" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-1.5 rounded-full text-sm font-semibold transition-colors">${ui.loginBtn}</button>`;
-                }
-            }
 
             renderJobs();
 
@@ -323,9 +314,8 @@
                                 <h3 class="text-lg font-bold text-gray-800 dark:text-white mt-3">${edu[lang].title}</h3>
                                 <p class="text-gray-600 dark:text-gray-300 text-sm mt-2">${edu[lang].desc}</p>
                             </div>
-                            <!-- 修改此處，將 this 傳遞給 JS -->
                             <button onclick="openCourseModal(${idx}, this)" class="text-blue-600 dark:text-blue-400 font-semibold text-sm flex items-center mt-4 bg-transparent border-none cursor-pointer p-0">
-                                ${ui.learnBtn} <span class="mx-1">→</span>
+                                ${ui.learnBtn} <span class="mx-1">▶</span>
                             </button>
                         </div>
                     </div>
@@ -334,7 +324,7 @@
 
             const comContainer = document.getElementById('com-container');
             if (comContainer) {
-                comContainer.innerHTML = mockCommunity.map(com => `
+                comContainer.innerHTML = mockCommunity.map((com, idx) => `
                     <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-shadow border border-gray-100 dark:border-gray-700 overflow-hidden flex flex-col">
                         <img src="${com.img}" class="w-full h-40 object-cover">
                         <div class="p-5 flex-1 flex flex-col justify-between">
@@ -343,7 +333,7 @@
                                 <h3 class="text-lg font-bold text-gray-800 dark:text-white mt-3">${com[lang].title}</h3>
                                 <p class="text-gray-600 dark:text-gray-300 text-sm mt-2">${com[lang].desc}</p>
                             </div>
-                            <button onclick="showDemoAlert()" class="w-full mt-4 bg-emerald-50 dark:bg-gray-700 hover:bg-emerald-600 dark:hover:bg-emerald-600 hover:text-white text-emerald-600 dark:text-emerald-300 font-semibold py-2 rounded-lg transition-colors">
+                            <button onclick="openCommunityModal(${idx}, this)" class="w-full mt-4 bg-emerald-50 dark:bg-gray-700 hover:bg-emerald-600 dark:hover:bg-emerald-600 hover:text-white text-emerald-600 dark:text-emerald-300 font-semibold py-2 rounded-lg transition-colors">
                                 ${ui.joinBtn}
                             </button>
                         </div>
