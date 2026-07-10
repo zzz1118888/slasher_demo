@@ -98,10 +98,7 @@
             <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-red-500 bg-white dark:bg-gray-700 rounded-full p-2 shadow-sm z-10 border border-gray-200 dark:border-gray-600">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
-            
-            <!-- 確保允許全螢幕和自動播放 -->
             <iframe id="modal-video" class="w-full h-64 md:h-80 rounded-t-2xl bg-black" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            
             <div class="p-6 md:p-8">
                 <span id="modal-tag" class="px-3 py-1 bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-200 rounded-full text-xs font-semibold mb-3 inline-block"></span>
                 <h3 id="modal-title" class="text-2xl font-bold text-gray-800 dark:text-white mb-2"></h3>
@@ -114,17 +111,20 @@
         </div>
     </div>
 
-    <!-- 社區活動介紹彈窗 -->
+    <!-- 🌟 社區活動介紹彈窗 (已升級為 max-w-2xl 寬版) -->
     <div id="community-modal" class="absolute inset-0 bg-gray-900 bg-opacity-60 z-[100] hidden flex items-start justify-center p-4 fade-in" onclick="if(event.target === this) closeModal()">
-        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto no-scrollbar relative">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto no-scrollbar relative">
             <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-red-500 bg-white dark:bg-gray-700 rounded-full p-2 shadow-sm z-10 border border-gray-200 dark:border-gray-600">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
-            <img id="comm-modal-img" src="" class="w-full h-56 object-cover rounded-t-2xl">
+            <img id="comm-modal-img" src="" class="w-full h-64 md:h-80 object-cover rounded-t-2xl">
             <div class="p-6 md:p-8">
                 <span id="comm-modal-tag" class="px-3 py-1 bg-emerald-50 dark:bg-emerald-900 text-emerald-600 dark:text-emerald-200 rounded-full text-xs font-semibold mb-3 inline-block"></span>
-                <h3 id="comm-modal-title" class="text-2xl font-bold text-gray-800 dark:text-white mb-4"></h3>
-                <div id="comm-modal-desc" class="text-gray-600 dark:text-gray-300 mb-8 space-y-3 leading-relaxed"></div>
+                <h3 id="comm-modal-title" class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mb-4"></h3>
+                
+                <!-- 內容容器：使用 space-y-4 控制段落間距，支援富文本 -->
+                <div id="comm-modal-desc" class="text-gray-600 dark:text-gray-300 mb-8 space-y-4 text-sm md:text-base leading-relaxed"></div>
+                
                 <button onclick="closeModal()" class="w-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-white font-bold py-3 rounded-lg transition-colors border border-gray-200 dark:border-gray-600">
                     關閉介紹
                 </button>
@@ -152,21 +152,87 @@
             { category: "Education", img: "https://picsum.photos/id/24/400/200", link: "https://hk.jobsdb.com/jobs?keywords=part+time+tutor", zh: { title: "小學課後功課輔導員", tag: "教育", pay: "HK$ 150-250/小時", desc: "於補習中心或學校，協助少數族裔學童完成中英文及數學功課。" }, en: { title: "After-school Tutor", tag: "Education", pay: "HK$ 150-250/hr", desc: "Help primary ethnic minority students with their daily homework." }, ur: { title: "پرائیویٹ ٹیوٹر", tag: "تعلیم", pay: "HK$ 250/hr", desc: "پرائمری طلباء کے لیے اسکول کے بعد ہوم ورک ٹیوشن فراہم کریں۔" }, hi: { title: "निजी ट्यूटर", tag: "शिक्षा", pay: "HK$ 250/hr", desc: "छात्रों के लिए स्कूल के बाद होमवर्क ट्यूशन।" }, ne: { title: "निजी ट्युटर", tag: "शिक्षा", pay: "HK$ 250/hr", desc: "विद्यार्थीहरूको लागि स्कूल पछि गृहकार्य ट्यूशन।" } }
         ];
 
+        // 🌟 完全不動你的 YouTube 連結資料
         const mockEducation = [
-            // 已替換為穩定且允許嵌入的 YouTube 影片
-            { img: "https://picsum.photos/id/36/400/200", videoUrl: "https://www.youtube.com/embed/jNQXAC9IVRw", zh: { title: "香港實用粵語入門", tag: "語言", desc: "專為非華語人士設計，快速掌握香港日常生活與面試常用對話。", syllabus: ["基礎發音與打招呼", "自我介紹技巧", "餐廳點餐與問路"] }, en: { title: "Basic HK Cantonese", tag: "Language", desc: "Master common Cantonese for daily life and interviews in Hong Kong.", syllabus: ["Pronunciation & Greetings", "Self-introduction", "Ordering Food"] }, ur: { title: "کینٹونیز کلاس", tag: "زبان", desc: "انٹرویوز کے لیے کینٹونیز۔", syllabus: ["تعارف", "مواصلات", "گفتگو"] }, hi: { title: "कैंटोनीज़ कक्षा", tag: "भाषा", desc: "साक्षात्कार के लिए कैंटोनीज़।", syllabus: ["परिचय", "संचार", "संवाद"] }, ne: { title: "क्यान्टोनिज कक्षा", tag: "भाषा", desc: "अन्तर्वार्ताका लागि क्यान्टोनिज।", syllabus: ["परिचय", "संचार", "संवाद"] } },
-            { img: "https://picsum.photos/id/48/400/200", videoUrl: "https://www.youtube.com/embed/M6cBcjTQcg8", zh: { title: "Canva 設計新手指南", tag: "科技", desc: "無需設計基礎！教你利用 Canva 快速製作吸引人的履歷與作品集。", syllabus: ["平台介面認識", "模板應用與修改", "匯出與分享設定"] }, en: { title: "Canva for Beginners", tag: "Tech", desc: "Learn to use Canva to create stunning resumes and portfolios.", syllabus: ["Interface Overview", "Using Templates", "Export Settings"] }, ur: { title: "کینوا ڈیزائن", tag: "ٹیک", desc: "ڈیزائن کے لیے AI۔", syllabus: ["ڈیجیٹل ٹولز", "کینوا ڈیزائن", "ChatGPT"] }, hi: { title: "कैनवा", tag: "तकनीक", desc: "डिज़ाइन के लिए AI।", syllabus: ["उपकरण", "कैनवा", "ChatGPT"] }, ne: { title: "क्यानभा", tag: "प्रविधि", desc: "डिजाइनको लागि AI।", syllabus: ["उपकरणहरू", "क्यानभा", "ChatGPT"] } },
-            { img: "https://picsum.photos/id/119/400/200", videoUrl: "https://www.youtube.com/embed/tgbNymZ7vqY", zh: { title: "自由工作者時間與財務管理", tag: "技能", desc: "Slasher 必備技能：如何管理不穩定的收入並高效規劃你的接單時間。", syllabus: ["建立被動收入概念", "工具推薦：時間追蹤", "基礎記帳與報稅觀念"] }, en: { title: "Freelancer Finance & Time", tag: "Skill", desc: "How to manage irregular income and plan your gig schedule effectively.", syllabus: ["Income Streams", "Time Tracking Tools", "Basic Accounting"] }, ur: { title: "ٹیکس ورکشاپ", tag: "مہارت", desc: "ذاتی کاروباری ٹیکس کو قانونی طور پر سنبھالنے کا طریقہ سیکھیں۔", syllabus: ["بزنس رجسٹریشن", "ٹیکس کی بنیادی باتیں", "مارکیٹنگ"] }, hi: { title: "कर कार्यशाला", tag: "कौशल", desc: "व्यापार करों को कानूनी रूप से संभालना सीखें।", syllabus: ["पंजीकरण", "कर की मूल बातें", "मार्केटिंग"] }, ne: { title: "कर कार्यशाला", tag: "सीप", desc: "व्यापार करहरू कानुनी रूपमा ह्यान्डल गर्न सिक्नुहोस्।", syllabus: ["दर्ता", "करको आधारभूत कुराहरू", "मार्केटिङ"] } },
-            { img: "https://picsum.photos/id/60/400/200", videoUrl: "https://www.youtube.com/embed/1vR3omXkX-c", zh: { title: "卓越客戶服務技巧", tag: "職業", desc: "提升你的職場競爭力，學習應對不同情緒客戶的溝通策略與禮儀。", syllabus: ["主動聆聽技巧", "化解衝突的說話術", "建立客戶忠誠度"] }, en: { title: "Excellent CS Skills", tag: "Career", desc: "Enhance competitiveness by learning strategies to handle diverse customers.", syllabus: ["Active Listening", "Conflict Resolution", "Building Loyalty"] }, ur: { title: "کسٹمر سروس کی مہارتیں", tag: "پیشہ", desc: "مختلف پس منظر کے صارفین سے نمٹنے کے لیے مہارتیں۔", syllabus: ["سروس آداب", "شکایات کو سنبھالنا", "عملی مشقیں"] }, hi: { title: "ग्राहक सेवा कौशल", tag: "पेशा", desc: "विविध ग्राहकों को संभालने के लिए कौशल सीखें।", syllabus: ["शिष्टाचार", "शिकायतों को संभालना", "अभ्यास"] }, ne: { title: "ग्राहक सेवा सीपहरू", tag: "क्यारियर", desc: "विविध ग्राहकहरूलाई ह्यान्डल गर्न सीपहरू सिक्नुहोस्।", syllabus: ["शिष्टाचार", "उजुरीहरू ह्यान्डल गर्दै", "अभ्यास"] } },
+            { img: "https://picsum.photos/id/36/400/200", videoUrl: "https://youtu.be/dGElgQZx-z0?list=PLSHa6FLWY75YtoYuHfyDLGoLdFolmhztC", zh: { title: "香港實用粵語入門", tag: "語言", desc: "專為非華語人士設計，快速掌握香港日常生活與面試常用對話。", syllabus: ["基礎發音與打招呼", "自我介紹技巧", "餐廳點餐與問路"] }, en: { title: "Basic HK Cantonese", tag: "Language", desc: "Master common Cantonese for daily life and interviews in Hong Kong.", syllabus: ["Pronunciation & Greetings", "Self-introduction", "Ordering Food"] }, ur: { title: "کینٹونیز کلاس", tag: "زبان", desc: "انٹرویوز کے لیے کینٹونیز۔", syllabus: ["تعارف", "مواصلات", "گفتگو"] }, hi: { title: "कैंटोनीज़ कक्षा", tag: "भाषा", desc: "साक्षात्कार के लिए कैंटोनीज़।", syllabus: ["परिचय", "संचार", "संवाद"] }, ne: { title: "क्यान्टोनिज कक्षा", tag: "भाषा", desc: "अन्तर्वार्ताका लागि क्यान्टोनिज।", syllabus: ["परिचय", "संचार", "संवाद"] } },
+            { img: "https://picsum.photos/id/48/400/200", videoUrl: "https://youtu.be/jzWxBuvwuwQ", zh: { title: "Canva 設計新手指南", tag: "科技", desc: "無需設計基礎！教你利用 Canva 快速製作吸引人的履歷與作品集。", syllabus: ["平台介面認識", "模板應用與修改", "匯出與分享設定"] }, en: { title: "Canva for Beginners", tag: "Tech", desc: "Learn to use Canva to create stunning resumes and portfolios.", syllabus: ["Interface Overview", "Using Templates", "Export Settings"] }, ur: { title: "کینوا ڈیزائن", tag: "ٹیک", desc: "ڈیزائن کے لیے AI۔", syllabus: ["ڈیجیٹل ٹولز", "کینوا ڈیزائن", "ChatGPT"] }, hi: { title: "कैनवा", tag: "तकनीक", desc: "डिज़ाइन के लिए AI।", syllabus: ["उपकरण", "कैनवा", "ChatGPT"] }, ne: { title: "क्यानभा", tag: "प्रविधि", desc: "डिजाइनको लागि AI।", syllabus: ["उपकरणहरू", "क्यानभा", "ChatGPT"] } },
+            { img: "https://picsum.photos/id/119/400/200", videoUrl: "https://youtu.be/fXAFNPnTWu0", zh: { title: "自由工作者時間與財務管理", tag: "技能", desc: "Slasher 必備技能：如何管理不穩定的收入並高效規劃你的接單時間。", syllabus: ["建立被動收入概念", "工具推薦：時間追蹤", "基礎記帳與報稅觀念"] }, en: { title: "Freelancer Finance & Time", tag: "Skill", desc: "How to manage irregular income and plan your gig schedule effectively.", syllabus: ["Income Streams", "Time Tracking Tools", "Basic Accounting"] }, ur: { title: "ٹیکس ورکشاپ", tag: "مہارت", desc: "ذاتی کاروباری ٹیکس کو قانونی طور پر سنبھالنے کا طریقہ سیکھیں۔", syllabus: ["بزنس رجسٹریشن", "ٹیکس کی بنیادی باتیں", "مارکیٹنگ"] }, hi: { title: "कर कार्यशाला", tag: "कौशल", desc: "व्यापार करों को कानूनी रूप से संभालना सीखें।", syllabus: ["पंजीकरण", "कर की मूल बातें", "मार्केटिंग"] }, ne: { title: "कर कार्यशाला", tag: "सीप", desc: "व्यापार करहरू कानुनी रूपमा ह्यान्डल गर्न सिक्नुहोस्।", syllabus: ["दर्ता", "करको आधारभूत कुराहरू", "मार्केटिङ"] } },
+            { img: "https://picsum.photos/id/60/400/200", videoUrl: "https://youtu.be/5E2VtCWwfzk", zh: { title: "卓越客戶服務技巧", tag: "職業", desc: "提升你的職場競爭力，學習應對不同情緒客戶的溝通策略與禮儀。", syllabus: ["主動聆聽技巧", "化解衝突的說話術", "建立客戶忠誠度"] }, en: { title: "Excellent CS Skills", tag: "Career", desc: "Enhance competitiveness by learning strategies to handle diverse customers.", syllabus: ["Active Listening", "Conflict Resolution", "Building Loyalty"] }, ur: { title: "کسٹمر سروس کی مہارتیں", tag: "پیشہ", desc: "مختلف پس منظر کے صارفین سے نمٹنے کے لیے مہارتیں۔", syllabus: ["سروس آداب", "شکایات کو سنبھالنا", "عملی مشقیں"] }, hi: { title: "ग्राहक सेवा कौशल", tag: "पेशा", desc: "विविध ग्राहकों को संभालने के लिए कौशल सीखें।", syllabus: ["शिष्टाचार", "शिकायतों को संभालना", "अभ्यास"] }, ne: { title: "ग्राहक सेवा सीपहरू", tag: "क्यारियर", desc: "विविध ग्राहकहरूलाई ह्यान्डल गर्न सीपहरू सिक्नुहोस्।", syllabus: ["शिष्टाचार", "उजुरीहरू ह्यान्डल गर्दै", "अभ्यास"] } },
             { img: "https://picsum.photos/id/96/400/200", videoUrl: "https://www.youtube.com/embed/kqtD5dpn9C8", zh: { title: "1小時學懂 Python 基礎", tag: "IT", desc: "最適合零基礎新手的 Python 速成班，開啟你的數據處理與自動化之路。", syllabus: ["變數與資料型別", "If/Else 條件判斷", "迴圈 (Loops) 應用"] }, en: { title: "Python in 1 Hour", tag: "IT", desc: "Crash course for beginners to start your journey in data automation.", syllabus: ["Variables & Data Types", "If/Else Conditions", "Basic Loops"] }, ur: { title: "بنیادی ازگر اور ڈیٹا", tag: "آئی ٹی", desc: "آفس آٹومیشن کے لیے کوڈنگ کا کورس۔", syllabus: ["ازگر کی بنیادی باتیں", "ڈیٹا کی صفائی", "اسکرپٹس"] }, hi: { title: "बुनियादी पायथन और डेटा", tag: "आईटी", desc: "कार्यालय स्वचालन के लिए कोडिंग पाठ्यक्रम।", syllabus: ["पायथन की मूल बातें", "डेटा की सफाई", "स्क्रिप्ट"] }, ne: { title: "आधारभूत पाइथन र डाटा", tag: "आईटी", desc: "कार्यालय स्वचालनको लागि कोडिङ पाठ्यक्रम।", syllabus: ["पाइथनको आधारभूत कुराहरू", "डाटा सफाई", "लिपिहरू"] } }
         ];
 
+        // 🌟 社區支持：加入豐富的 HTML 結構，展現詳細頁面感
         const mockCommunity = [
-            { img: "https://picsum.photos/id/175/400/200", zh: { title: "勞工權益與強積金指南", tag: "法律保障", desc: "<p>作為一名 Slasher，由於缺乏單一雇主，許多人往往忽視了自身的勞工權益。本資源站整理了針對香港自由工作者的法律保障重點。</p><p><b>重點內容包括：</b><br>• 如何草擬及審閱接單合約，避免勞資糾紛。<br>• 了解「自僱人士」在強積金 (MPF) 制度下的供款責任與權利。<br>• 遇到拖欠薪金或工傷時，少數族裔可尋求協助的非政府組織及政府部門聯繫方式。</p>" }, en: { title: "Labor Rights & MPF Guide", tag: "Legal", desc: "<p>Freelancers often overlook their rights. This guide provides essential legal protection details for Slashers in HK.</p><p><b>Includes:</b><br>• Drafting freelance contracts.<br>• MPF rules for self-employed individuals.<br>• Emergency contacts for wage disputes.</p>" }, ur: { title: "لیبر رائٹس گائیڈ", tag: "قانونی", desc: "اپنے قانونی حقوق اور MPF کو سمجھیں۔" }, hi: { title: "श्रम अधिकार गाइड", tag: "कानूनी", desc: "कानूनी अधिकारों को समझें।" }, ne: { title: "श्रम अधिकार गाइड", tag: "कानूनी", desc: "कानूनी अधिकारहरू बुझ्नुहोस्।" } },
-            { img: "https://picsum.photos/id/117/400/200", zh: { title: "Slasher 互助交流與人脈網絡", tag: "社交聚會", desc: "<p>孤軍奮戰是許多自由工作者的痛點。我們每月舉辦一次實體交流會，提供一個專屬少數族裔的溫暖社群。</p><p><b>活動特色：</b><br>• <b>經驗分享：</b> 資深 Slasher 分享他們如何獲得第一批客戶。<br>• <b>資源互換：</b> 尋找跨領域合作夥伴（例如：翻譯員尋找網頁設計師合作）。<br>• <b>語言無障礙：</b> 提供中、英及多種少數族裔語言的即時協助，確保所有人都能融入對話。</p>" }, en: { title: "Networking & Support Group", tag: "Social", desc: "<p>Join our monthly offline gatherings designed to help ethnic minority freelancers build meaningful connections.</p><p><b>Highlights:</b><br>• Client acquisition sharing.<br>• Skill bartering and partnerships.<br>• Multilingual friendly environment.</p>" }, ur: { title: "نیٹ ورکنگ ایونٹ", tag: "نیٹ ورکنگ", desc: "گگ کے تجربات شیئر کرنے کے لیے اجتماع۔" }, hi: { title: "نیٹवर्किंग इवेंट", tag: "सामाजिक", desc: "अनुभव साझा करने के लिए सभा।" }, ne: { title: "नेटवर्किंग कार्यक्रम", tag: "सामाजिक", desc: "अनुभव साझा गर्न भेला।" } },
-            { img: "https://picsum.photos/id/152/400/200", zh: { title: "減壓與心理健康支援小組", tag: "健康關注", desc: "<p>面對不穩定的收入與文化適應壓力，心理健康至關重要。本支援小組由註冊社工及心理輔導員帶領。</p><p><b>我們提供：</b><br>• <b>靜觀與放鬆練習：</b> 學習如何在緊湊的接單生活中按下暫停鍵。<br>• <b>小組輔導：</b> 在安全保密的環境下，探討身分認同、家庭期望與職業選擇之間的掙扎。<br>• <b>一對一轉介：</b> 如有需要，可協助轉介至免費或低收費的專業臨床心理服務。</p>" }, en: { title: "Mental Health & De-stress Group", tag: "Health", desc: "<p>Managing irregular income and cultural expectations can be stressful. Our social worker-led groups are here for you.</p><p><b>We offer:</b><br>• Mindfulness training.<br>• Safe group counseling.<br>• Referrals to professional clinical services.</p>" }, ur: { title: "ذہنی صحت سپورٹ", tag: "صحت", desc: "سماجی کارکنوں کی قیادت میں، جذباتی مدد فراہم کرنا۔" }, hi: { title: "मानसिक स्वास्थ्य सहायता", tag: "स्वास्थ्य", desc: "भावनात्मक समर्थन प्रदान करना।" }, ne: { title: "मानसिक स्वास्थ्य समर्थन", tag: "स्वास्थ्य", desc: "भावनात्मक समर्थन प्रदान गर्दै।" } },
-            { img: "https://picsum.photos/id/195/400/200", zh: { title: "公共津貼與房屋申請工作坊", tag: "社會福利", desc: "<p>繁瑣的政府文件與語言障礙常讓少數族裔錯失應有的社會福利。我們致力於打破這道資訊高牆。</p><p><b>工作坊內容：</b><br>• 解讀房屋署（Housing Authority）及在職家庭津貼（WFA）的最新申請資格。<br>• 專人一對一協助填寫繁體中文或英文表格。<br>• 協助核對所需提交的自由工作者入息證明文件，提高申請成功率。</p>" }, en: { title: "Housing & Subsidy Workshop", tag: "Welfare", desc: "<p>Don't let language barriers stop you from accessing public resources. We help you navigate government forms.</p><p><b>Workshop covers:</b><br>• Explaining WFA and Housing Authority criteria.<br>• 1-on-1 form-filling assistance.<br>• Organizing freelancer income proofs.</p>" }, ur: { title: "ہاؤسنگ سبسڈی ورکشاپ", tag: "فلاح", desc: "سرکاری سبسڈی کے لیے درخواست دینے میں مدد کریں۔" }, hi: { title: "आवास सब्सिडी कार्यशाला", tag: "कल्याण", desc: "सरकारी सब्सिडी के लिए आवेदन करने में सहायता।" }, ne: { title: "आवास सब्सिडी कार्यशाला", tag: "कल्याण", desc: "सरकारी सब्सिडीको लागि आवेदन दिन सहयोग गर्नुहोस्।" } },
-            { img: "https://picsum.photos/id/325/400/200", zh: { title: "個人品牌建立與成功經驗談", tag: "實體活動", desc: "<p>要成為成功的 Slasher，你不僅需要專業技能，更需要懂得「推銷自己」。</p><p><b>活動亮點：</b><br>• 邀請已經在 IT、翻譯、設計等領域站穩腳步的少數族裔前輩，分享他們的奮鬥史。<br>• 學習如何使用 LinkedIn 和個人網站包裝你的多元文化背景，將其轉化為職場上獨一無二的競爭優勢。<br>• Q&A 環節，讓你直接向行業專家請教疑難雜症。</p>" }, en: { title: "Personal Branding Success Talk", tag: "Event", desc: "<p>To be a successful Slasher, you need to know how to market yourself. Learn from the best in our community.</p><p><b>Highlights:</b><br>• Success stories from EM freelancers in IT/Design.<br>• Tips on using LinkedIn and leveraging your multicultural background.<br>• Live Q&A sessions.</p>" }, ur: { title: "کامیابی کا اشتراک", tag: "ایونٹ", desc: "سینئر سلیشرز کو اپنی کامیابی کی کہانیاں شیئر کرنے کی دعوت دیں۔" }, hi: { title: "सफलता साझा करना", tag: "इवेंट", desc: "वरिष्ठ स्लैशर्स को आमंत्रित करें।" }, ne: { title: "सफलता साझेदारी", tag: "घटना", desc: "वरिष्ठ स्ल्यासरहरूलाई आमन्त्रित गर्नुहोस्।" } }
+            { 
+                img: "https://picsum.photos/id/175/800/400", 
+                zh: { 
+                    title: "勞工權益與強積金指南", 
+                    tag: "法律保障", 
+                    desc: "<div class='flex gap-4 text-sm text-gray-500 mb-4 bg-gray-100 dark:bg-gray-700 p-3 rounded-lg'><span>🗓 隨時查閱</span><span>💻 線上指南</span></div><p>作為一名 Slasher，由於缺乏單一雇主，許多人往往忽視了自身的勞工權益。本資源站專門整理了針對香港自由工作者的法律保障重點。</p><h4 class='text-lg font-bold text-gray-800 dark:text-white mt-6 mb-2'>📑 重點內容涵蓋</h4><ul class='list-disc pl-5 space-y-2 mb-6'><li><b>合約草擬與審閱：</b> 了解標準 Freelance 合約應包含的條款，如何設定訂金與尾數付款條件，避免勞資糾紛與「走數」。</li><li><b>強積金 (MPF) 須知：</b> 了解「自僱人士」在強積金制度下的強制供款責任、免稅額計算，以及如何選擇合適的強積金計劃。</li><li><b>工傷與保險：</b> 自由工作者不受一般僱員補償條例保障，教你如何購買適合的個人意外或專業責任保險。</li></ul><div class='bg-blue-50 dark:bg-gray-700/50 p-4 rounded-lg border-l-4 border-blue-500'><p class='font-bold text-blue-800 dark:text-blue-300'>💡 尋求協助</p><p class='text-sm mt-1'>遇到拖欠薪金時，可聯繫勞工處或少數族裔專屬支援 NGO（如融幼社、基督教勵行會）尋求免費法律諮詢。</p></div>" 
+                }, 
+                en: { 
+                    title: "Labor Rights & MPF Guide", 
+                    tag: "Legal", 
+                    desc: "<div class='flex gap-4 text-sm text-gray-500 mb-4 bg-gray-100 dark:bg-gray-700 p-3 rounded-lg'><span>🗓 Always Available</span><span>💻 Online Guide</span></div><p>Freelancers often overlook their rights. This comprehensive guide provides essential legal protection details for Slashers in Hong Kong.</p><h4 class='text-lg font-bold text-gray-800 dark:text-white mt-6 mb-2'>📑 Key Topics</h4><ul class='list-disc pl-5 space-y-2 mb-6'><li><b>Drafting Contracts:</b> Learn what terms a standard freelance contract must include to prevent payment disputes.</li><li><b>MPF Rules:</b> Understand mandatory contributions for self-employed individuals and tax deductions.</li><li><b>Insurance:</b> Guidance on purchasing personal accident and professional liability insurance.</li></ul><div class='bg-blue-50 dark:bg-gray-700/50 p-4 rounded-lg border-l-4 border-blue-500'><p class='font-bold text-blue-800 dark:text-blue-300'>💡 Need Help?</p><p class='text-sm mt-1'>In case of unpaid wages, contact the Labour Department or NGOs like PathFinders for free consultation.</p></div>" 
+                },
+                ur: { title: "لیبر رائٹس گائیڈ", tag: "قانونی", desc: "اپنے قانونی حقوق اور MPF کو سمجھیں۔" }, hi: { title: "श्रम अधिकार गाइड", tag: "कानूनी", desc: "कानूनी अधिकारों को समझें।" }, ne: { title: "श्रम अधिकार गाइड", tag: "कानूनी", desc: "कानूनी अधिकारहरू बुझ्नुहोस्।" } 
+            },
+            { 
+                img: "https://picsum.photos/id/117/800/400", 
+                zh: { 
+                    title: "Slasher 互助交流與人脈網絡", 
+                    tag: "社交聚會", 
+                    desc: "<div class='flex gap-4 text-sm text-gray-500 mb-4 bg-gray-100 dark:bg-gray-700 p-3 rounded-lg'><span>🗓 每月首個週六</span><span>📍 尖沙咀社區中心</span></div><p>孤軍奮戰是許多自由工作者的痛點。我們每月舉辦一次實體交流會，提供一個專屬少數族裔的溫暖社群，讓你在輕鬆的氛圍中結識同行。</p><h4 class='text-lg font-bold text-gray-800 dark:text-white mt-6 mb-2'>🌟 活動特色</h4><ul class='list-disc pl-5 space-y-2 mb-6'><li><b>經驗分享會：</b> 每期邀請資深 Slasher 分享他們如何獲得第一批客戶及報價技巧。</li><li><b>資源與技能互換：</b> 尋找跨領域合作夥伴（例如：外語翻譯員尋找網頁設計師互相幫忙）。</li><li><b>語言無障礙：</b> 現場提供中、英及多種少數族裔語言（如烏爾都語、尼泊爾語）的即時協助，確保所有人都能融入對話。</li></ul>" 
+                }, 
+                en: { 
+                    title: "Networking & Support Group", 
+                    tag: "Social", 
+                    desc: "<div class='flex gap-4 text-sm text-gray-500 mb-4 bg-gray-100 dark:bg-gray-700 p-3 rounded-lg'><span>🗓 1st Saturday Monthly</span><span>📍 TST Community Center</span></div><p>Join our monthly offline gatherings designed to help ethnic minority freelancers build meaningful connections and find collaboration opportunities.</p><h4 class='text-lg font-bold text-gray-800 dark:text-white mt-6 mb-2'>🌟 Event Highlights</h4><ul class='list-disc pl-5 space-y-2 mb-6'><li><b>Experience Sharing:</b> Hear from senior slashers on how they acquired their first clients.</li><li><b>Skill Bartering:</b> Find cross-industry partners (e.g., translators pairing with designers).</li><li><b>Multilingual Environment:</b> Assistance in English, Cantonese, Urdu, and Nepali is provided.</li></ul>" 
+                },
+                ur: { title: "نیٹ ورکنگ ایونٹ", tag: "نیٹ ورکنگ", desc: "گگ کے تجربات شیئر کرنے کے لیے اجتماع۔" }, hi: { title: "नेटवर्किंग इवेंट", tag: "सामाजिक", desc: "अनुभव साझा करने के लिए सभा।" }, ne: { title: "नेटवर्किंग कार्यक्रम", tag: "सामाजिक", desc: "अनुभव साझा गर्न भेला।" } 
+            },
+            { 
+                img: "https://picsum.photos/id/152/800/400", 
+                zh: { 
+                    title: "減壓與心理健康支援小組", 
+                    tag: "健康關注", 
+                    desc: "<div class='flex gap-4 text-sm text-gray-500 mb-4 bg-gray-100 dark:bg-gray-700 p-3 rounded-lg'><span>🗓 逢星期三晚</span><span>💻 Zoom 線上小組</span></div><p>面對不穩定的收入與文化適應壓力，心理健康至關重要。本支援小組由註冊社工及具備少數族裔文化背景的心理輔導員帶領。</p><h4 class='text-lg font-bold text-gray-800 dark:text-white mt-6 mb-2'>🧘‍♀️ 服務內容</h4><ul class='list-disc pl-5 space-y-2 mb-6'><li><b>靜觀與放鬆練習：</b> 學習如何在緊湊的接單生活中按下暫停鍵，緩解焦慮。</li><li><b>小組輔導：</b> 在絕對安全保密的環境下，探討身分認同、家庭期望與職業選擇之間的掙扎。</li><li><b>專業一對一轉介：</b> 如有需要，社工可協助轉介至免費或低收費的專業臨床心理治療服務。</li></ul>" 
+                }, 
+                en: { 
+                    title: "Mental Health & De-stress Group", 
+                    tag: "Health", 
+                    desc: "<div class='flex gap-4 text-sm text-gray-500 mb-4 bg-gray-100 dark:bg-gray-700 p-3 rounded-lg'><span>🗓 Every Wednesday Night</span><span>💻 Zoom Sessions</span></div><p>Managing irregular income and cultural expectations can be highly stressful. Our social worker-led groups are here for you.</p><h4 class='text-lg font-bold text-gray-800 dark:text-white mt-6 mb-2'>🧘‍♀️ What We Offer</h4><ul class='list-disc pl-5 space-y-2 mb-6'><li><b>Mindfulness Training:</b> Learn to hit the pause button and manage anxiety.</li><li><b>Group Counseling:</b> A safe space to discuss cultural identity and career struggles.</li><li><b>Professional Referrals:</b> Access to free or subsidized clinical psychology services if needed.</li></ul>" 
+                },
+                ur: { title: "ذہنی صحت سپورٹ", tag: "صحت", desc: "سماجی کارکنوں کی قیادت میں، جذباتی مدد فراہم کرنا۔" }, hi: { title: "मानसिक स्वास्थ्य सहायता", tag: "स्वास्थ्य", desc: "भावनात्मक समर्थन प्रदान करना।" }, ne: { title: "मानसिक स्वास्थ्य समर्थन", tag: "स्वास्थ्य", desc: "भावनात्मक समर्थन प्रदान गर्दै।" } 
+            },
+            { 
+                img: "https://picsum.photos/id/195/800/400", 
+                zh: { 
+                    title: "公共津貼與房屋申請工作坊", 
+                    tag: "社會福利", 
+                    desc: "<div class='flex gap-4 text-sm text-gray-500 mb-4 bg-gray-100 dark:bg-gray-700 p-3 rounded-lg'><span>🗓 每月中旬</span><span>📍 各區指定 NGO 中心</span></div><p>繁瑣的政府文件與語言障礙，常讓少數族裔錯失應有的社會福利。我們致力於打破這道資訊高牆。</p><h4 class='text-lg font-bold text-gray-800 dark:text-white mt-6 mb-2'>📝 工作坊重點</h4><ul class='list-disc pl-5 space-y-2 mb-6'><li><b>政策解讀：</b> 簡單易懂地解說房屋署（公屋申請）及在職家庭津貼（WFA）的最新申請資格。</li><li><b>表格填寫協助：</b> 專員提供一對一指導，協助填寫繁體中文或英文的政府表格。</li><li><b>入息證明整理：</b> 針對 Slasher 收入不固定的特點，協助整理合規的入息證明文件，大幅提高申請成功率。</li></ul>" 
+                }, 
+                en: { 
+                    title: "Housing & Subsidy Workshop", 
+                    tag: "Welfare", 
+                    desc: "<div class='flex gap-4 text-sm text-gray-500 mb-4 bg-gray-100 dark:bg-gray-700 p-3 rounded-lg'><span>🗓 Mid-month</span><span>📍 Local NGO Centers</span></div><p>Don't let complex paperwork and language barriers stop you from accessing public resources. We help you navigate government forms with ease.</p><h4 class='text-lg font-bold text-gray-800 dark:text-white mt-6 mb-2'>📝 Workshop Focus</h4><ul class='list-disc pl-5 space-y-2 mb-6'><li><b>Policy Explanation:</b> Breaking down criteria for Public Housing and Working Family Allowance (WFA).</li><li><b>Form-filling Help:</b> 1-on-1 assistance with complex Chinese/English forms.</li><li><b>Income Proof Prep:</b> Helping freelancers organize valid income proofs to increase approval rates.</li></ul>" 
+                },
+                ur: { title: "ہاؤسنگ سبسڈی ورکشاپ", tag: "فلاح", desc: "سرکاری سبسڈی کے لیے درخواست دینے میں مدد کریں۔" }, hi: { title: "आवास सब्सिडी कार्यशाला", tag: "कल्याण", desc: "सरकारी सब्सिडी के लिए आवेदन करने में सहायता।" }, ne: { title: "आवास सब्सिडी कार्यशाला", tag: "कल्याण", desc: "सरकारी सब्सिडीको लागि आवेदन दिन सहयोग गर्नुहोस्।" } 
+            },
+            { 
+                img: "https://picsum.photos/id/325/800/400", 
+                zh: { 
+                    title: "個人品牌建立與成功經驗談", 
+                    tag: "實體活動", 
+                    desc: "<div class='flex gap-4 text-sm text-gray-500 mb-4 bg-gray-100 dark:bg-gray-700 p-3 rounded-lg'><span>🗓 即將公佈</span><span>📍 觀塘共創空間</span></div><p>要成為成功的 Slasher，你不僅需要過硬的專業技能，更需要懂得如何「推銷自己」。</p><h4 class='text-lg font-bold text-gray-800 dark:text-white mt-6 mb-2'>🎤 活動亮點</h4><ul class='list-disc pl-5 space-y-2 mb-6'><li><b>前輩經驗談：</b> 邀請已經在 IT 支援、多語言翻譯、平面設計等領域站穩腳步的少數族裔自由工作者，分享他們的奮鬥史。</li><li><b>數碼足跡經營：</b> 學習如何使用 LinkedIn 和個人網站包裝你的多元文化背景，將其轉化為職場上獨一無二的競爭優勢。</li><li><b>Q&A 環節：</b> 現場解答你在報價、尋找客源、與本地客戶溝通等方面的疑難雜症。</li></ul>" 
+                }, 
+                en: { 
+                    title: "Personal Branding Success Talk", 
+                    tag: "Event", 
+                    desc: "<div class='flex gap-4 text-sm text-gray-500 mb-4 bg-gray-100 dark:bg-gray-700 p-3 rounded-lg'><span>🗓 TBA</span><span>📍 Kwun Tong Co-working</span></div><p>To be a successful Slasher, you need more than just skills—you need to know how to market yourself effectively.</p><h4 class='text-lg font-bold text-gray-800 dark:text-white mt-6 mb-2'>🎤 Event Highlights</h4><ul class='list-disc pl-5 space-y-2 mb-6'><li><b>Success Stories:</b> Hear from established EM freelancers in IT, Translation, and Design.</li><li><b>Digital Footprint:</b> Learn to use LinkedIn to turn your multicultural background into a competitive advantage.</li><li><b>Live Q&A:</b> Direct answers to your questions on pricing, finding clients, and local communication.</li></ul>" 
+                },
+                ur: { title: "کامیابی کا اشتراک", tag: "ایونٹ", desc: "سینئر سلیشرز کو اپنی کامیابی کی کہانیاں شیئر کرنے کی دعوت دیں۔" }, hi: { title: "सफलता साझा करना", tag: "इवेंट", desc: "वरिष्ठ स्लैशर्स को आमंत्रित करें।" }, ne: { title: "सफलता साझेदारी", tag: "घटना", desc: "वरिष्ठ स्ल्यासरहरूलाई आमन्त्रित गर्नुहोस्।" } 
+            }
         ];
 
         function toggleDarkMode() { document.documentElement.classList.toggle('dark'); }
@@ -180,7 +246,12 @@
             safeSet('modal-desc', c.desc);
             safeSet('modal-syllabus-title', uiTranslations[currentLang].syllabusTitle);
             
-            document.getElementById('modal-video').src = edu.videoUrl;
+            // 🌟 自動轉換 youtu.be 為 embed 格式，確保能播放且不更動原始資料
+            let finalVideoUrl = edu.videoUrl;
+            if (finalVideoUrl.includes('youtu.be/')) {
+                finalVideoUrl = finalVideoUrl.replace('youtu.be/', 'www.youtube.com/embed/');
+            }
+            document.getElementById('modal-video').src = finalVideoUrl;
             
             const list = document.getElementById('modal-syllabus-list');
             if(list) list.innerHTML = c.syllabus.map(i => `<li>${i}</li>`).join('');
@@ -204,6 +275,7 @@
             safeSet('comm-modal-tag', c.tag);
             safeSet('comm-modal-title', c.title);
             
+            // 使用 innerHTML 讓詳細內容的 HTML 標籤生效
             const descEl = document.getElementById('comm-modal-desc');
             if(descEl) descEl.innerHTML = c.desc;
             
@@ -257,7 +329,6 @@
             
             const filtered = currentFilter === 'All' ? mockJobs : mockJobs.filter(j => j.category === currentFilter);
             
-            // 重要修改：將 button 改成 a 標籤，並加上 target="_blank" 逃脫 iframe 限制
             container.innerHTML = filtered.map(job => `
                 <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-shadow border border-gray-100 dark:border-gray-700 overflow-hidden fade-in flex flex-col">
                     <img src="${job.img}" class="w-full h-40 object-cover">
