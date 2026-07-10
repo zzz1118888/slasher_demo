@@ -10,8 +10,7 @@ if os.path.exists(file_path):
     with open(file_path, "r", encoding="utf-8") as f:
         html_content = f.read()
         
-    # 🌟 继续把 height 调大，比如 3000 或 3500
-    components.html(html_content, height=3000, scrolling=False)
+    components.html(html_content, height=8000, scrolling=False)
     
 else:
     st.error(f"找不到文件: {file_path}，请检查文件名和路径。")
